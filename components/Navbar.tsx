@@ -10,6 +10,7 @@ export default function Navbar() {
   const [text, setText] = useState("");
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const fullText = "Indcode";
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Enhanced scroll effect with threshold
   useEffect(() => {
@@ -252,9 +253,7 @@ export default function Navbar() {
       <div className="fixed top-0 left-0 right-0 h-1 z-50">
         <div 
           className="h-full bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 transition-all duration-300"
-          style={{
-            width: `${Math.min((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 100, 100)}%`
-          }}
+          style={{ width: `${scrollProgress}%` }}
         />
       </div>
     </>
