@@ -1,8 +1,8 @@
-import {Globe} from "lucide-react"
+import { Globe, Linkedin, Github, Twitter, Mail } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="bg-black border-t border-gray-800 py-12">
+    <footer className="bg-black border-t border-gray-800 py-8">
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="mb-6 md:mb-0">
@@ -12,11 +12,27 @@ export default function Footer() {
               </div>
               <p className="text-gray-400 mt-2">Building the future, one line at a time.</p>
             </div>
-            <div className="flex gap-8">
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">LinkedIn</a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">GitHub</a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">Twitter</a>
-              <a href="#" className="text-gray-400 hover:text-white transition-colors">Contact</a>
+            <div className="flex gap-6">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" 
+                 className="text-gray-400 hover:text-blue-500 transition-colors"
+                 aria-label="LinkedIn">
+                <Linkedin className="w-6 h-6" />
+              </a>
+              <a href="https://github.com" target="_blank" rel="noopener noreferrer" 
+                 className="text-gray-400 hover:text-white transition-colors"
+                 aria-label="GitHub">
+                <Github className="w-6 h-6" />
+              </a>
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" 
+                 className="text-gray-400 hover:text-blue-400 transition-colors"
+                 aria-label="Twitter">
+                <Twitter className="w-6 h-6" />
+              </a>
+              <a href="mailto:hello@indcode.com" 
+                 className="text-gray-400 hover:text-red-400 transition-colors"
+                 aria-label="Email">
+                <Mail className="w-6 h-6" />
+              </a>
             </div>
           </div>
           <div className="mt-8 pt-8 border-t border-gray-800 text-center text-gray-500 text-sm">
