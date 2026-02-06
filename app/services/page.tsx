@@ -63,7 +63,7 @@ export default function ServicesPage() {
       category: "cloud",
       icon: Cloud,
       title: "Cloud Architecture & DevOps",
-      description: "End-to-end cloud solutions with AWS, Azure, and Google Cloud Platform.",
+      description: "End-to-end cloud solutions with AWS, Azure, and Google Cloud Platform. Automated CI/CD pipelines and scalable infrastructure.",
       features: ["Microservices", "CI/CD Pipelines", "Containerization", "Auto-scaling"],
       price: "From $3,000",
       duration: "2-4 Weeks",
