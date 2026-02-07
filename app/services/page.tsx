@@ -1,14 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { 
-  Code2, 
-  Smartphone, 
-  Cloud, 
-  Database, 
-  Shield, 
-  Zap, 
-  Globe, 
+import {
+  Code2,
+  Smartphone,
+  Cloud,
+  Database,
+  Shield,
+  Zap,
+  Globe,
   BarChart3,
   Cpu,
   Palette,
@@ -43,7 +43,7 @@ export default function ServicesPage() {
       title: "Enterprise Web Development",
       description: "Scalable, high-performance web applications built with modern frameworks like Next.js, React, and Node.js.",
       features: ["Custom CMS", "E-commerce Solutions", "API Integration", "Real-time Features"],
-      price: "From $5,000",
+      price: "From ₹ 5,000",
       duration: "4-8 Weeks",
       popular: true
     },
@@ -54,7 +54,7 @@ export default function ServicesPage() {
       title: "Cross-Platform Mobile Apps",
       description: "Native-like mobile experiences using React Native and Flutter for iOS and Android.",
       features: ["Offline Support", "Push Notifications", "App Store Deployment", "In-App Purchases"],
-      price: "From $8,000",
+      price: "From ₹ 8,000",
       duration: "6-12 Weeks",
       popular: false
     },
@@ -65,7 +65,7 @@ export default function ServicesPage() {
       title: "Cloud Architecture & DevOps",
       description: "End-to-end cloud solutions with AWS, Azure, and Google Cloud Platform. Automated CI/CD pipelines.",
       features: ["Microservices", "CI/CD Pipelines", "Containerization", "Auto-scaling"],
-      price: "From $3,000",
+      price: "From ₹ 3,000",
       duration: "2-4 Weeks",
       popular: true
     },
@@ -76,7 +76,7 @@ export default function ServicesPage() {
       title: "AI & Machine Learning",
       description: "Intelligent solutions with predictive analytics, chatbots, and automation.",
       features: ["ChatGPT Integration", "Predictive Models", "Computer Vision", "NLP Processing"],
-      price: "From $10,000",
+      price: "From ₹ 10,000",
       duration: "8-16 Weeks",
       popular: false
     },
@@ -87,7 +87,7 @@ export default function ServicesPage() {
       title: "UI/UX Design & Prototyping",
       description: "User-centered design with interactive prototypes and design systems.",
       features: ["User Research", "Wireframing", "Design Systems", "Usability Testing"],
-      price: "From $2,500",
+      price: "From ₹ 2,500",
       duration: "2-6 Weeks",
       popular: false
     },
@@ -98,7 +98,7 @@ export default function ServicesPage() {
       title: "Database Architecture",
       description: "Optimized database solutions with MongoDB, PostgreSQL, and Redis.",
       features: ["Data Migration", "Query Optimization", "Backup Solutions", "Real-time Sync"],
-      price: "From $4,000",
+      price: "From ₹ 4,000",
       duration: "3-6 Weeks",
       popular: false
     },
@@ -109,7 +109,7 @@ export default function ServicesPage() {
       title: "Business Process Automation",
       description: "Automate workflows and increase efficiency with custom automation tools.",
       features: ["Workflow Design", "RPA", "API Automation", "Report Generation"],
-      price: "From $6,000",
+      price: "From ₹ 6,000",
       duration: "4-10 Weeks",
       popular: true
     },
@@ -120,7 +120,7 @@ export default function ServicesPage() {
       title: "Cybersecurity Solutions",
       description: "Enterprise-grade security audits, penetration testing, and secure architecture.",
       features: ["Security Audits", "Penetration Testing", "SSL Implementation", "GDPR Compliance"],
-      price: "From $3,500",
+      price: "From ₹ 3,500",
       duration: "2-5 Weeks",
       popular: false
     },
@@ -131,20 +131,20 @@ export default function ServicesPage() {
       title: "Progressive Web Apps (PWA)",
       description: "Native app-like experiences that work offline and install on devices.",
       features: ["Offline Functionality", "Push Notifications", "App-like UI", "Cross-platform"],
-      price: "From $7,000",
+      price: "From ₹ 7,000",
       duration: "5-10 Weeks",
       popular: true
     },
   ];
 
-  const filteredServices = activeTab === "all" 
-    ? services 
+  const filteredServices = activeTab === "all"
+    ? services
     : services.filter(service => service.category === activeTab);
 
   const stats = [
-    { value: "200+", label: "Projects Completed" },
-    { value: "98%", label: "Client Satisfaction" },
-    { value: "50+", label: "Expert Engineers" },
+    { value: "20+", label: "Projects Completed" },
+    { value: "95%", label: "Client Satisfaction" },
+    { value: "5+", label: "Expert Engineers" },
     { value: "24/7", label: "Support Available" },
   ];
 
@@ -156,7 +156,7 @@ export default function ServicesPage() {
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
         </div>
-        
+
         <div className="relative max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -167,14 +167,14 @@ export default function ServicesPage() {
               <Sparkles className="w-4 h-4 text-blue-400" />
               <span className="text-blue-400 text-sm font-medium">OUR SERVICES</span>
             </div>
-            
+
             <h1 className="text-6xl md:text-8xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-300 mb-6">
               Building Digital
               <span className="block mt-4">Products for the <span className="text-blue-400">Future</span></span>
             </h1>
-            
+
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
-              We deliver cutting-edge digital solutions that drive growth, enhance efficiency, 
+              We deliver cutting-edge digital solutions that drive growth, enhance efficiency,
               and create lasting value for your business.
             </p>
 
@@ -204,7 +204,7 @@ export default function ServicesPage() {
             <button
               key={category.id}
               onClick={() => setActiveTab(category.id)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ₹ {
                 activeTab === category.id
                   ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
                   : "bg-gray-900 text-gray-300 hover:bg-gray-800 border border-gray-800"
@@ -266,10 +266,12 @@ export default function ServicesPage() {
               </div>
 
               {/* CTA Button */}
-              <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 flex items-center justify-center gap-2 group">
-                Get Started
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </button>
+              <a href="/schedule_call">
+                <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 flex items-center justify-center gap-2 group cursor-pointer">
+                  Get Started
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </a>
             </motion.div>
           ))}
         </div>
@@ -322,12 +324,17 @@ export default function ServicesPage() {
               Partner with Indcode Technologies to transform your ideas into scalable digital products.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20">
-                Schedule a Free Consultation
-              </button>
-              <button className="px-10 py-4 bg-transparent border-2 border-gray-700 text-white font-bold rounded-xl hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105">
-                View Case Studies
-              </button>
+              <a href="/schedule_call">
+                <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 cursor-pointer">
+                  Schedule a Free Consultation
+                </button>
+              </a>
+
+              <a href="/projects">
+                <button className="px-10 py-4 bg-transparent border-2 border-gray-700 text-white font-bold rounded-xl hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105 cursor-pointer">
+                  View Case Studies
+                </button>
+              </a>
             </div>
           </motion.div>
         </div>

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { 
+import {
   Briefcase,
   GraduationCap,
   Users,
@@ -128,7 +128,7 @@ export default function CareersPage() {
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
         </div>
-        
+
         <div className="relative max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -138,14 +138,14 @@ export default function CareersPage() {
               <Sparkles className="w-4 h-4 text-blue-400" />
               <span className="text-blue-400 text-sm font-medium">JOIN OUR TEAM</span>
             </div>
-            
+
             <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-300 mb-6">
               Build Your
               <span className="block mt-4">Career With <span className="text-blue-400">Purpose</span></span>
             </h1>
-            
+
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
-              Join a passionate team that's shaping the future of technology. 
+              Join a passionate team that's shaping the future of technology.
               Work on challenging projects, grow your skills, and make a real impact.
             </p>
           </motion.div>
@@ -164,11 +164,10 @@ export default function CareersPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-8 py-4 rounded-xl font-medium transition-all duration-300 flex items-center gap-3 ${
-                  activeTab === tab.id
+                className={`px-8 py-4 rounded-xl font-medium transition-all duration-300 flex items-center gap-3 ${activeTab === tab.id
                     ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
-                }`}
+                  }`}
               >
                 <tab.icon className="w-5 h-5" />
                 {tab.label}
@@ -204,9 +203,9 @@ export default function CareersPage() {
                           {job.department}
                         </span>
                       </div>
-                      
+
                       <p className="text-gray-400 mb-6">{job.description}</p>
-                      
+
                       {/* Job Details */}
                       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                         <div className="flex items-center gap-2">
@@ -370,20 +369,25 @@ export default function CareersPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
               Don't See the Perfect <span className="text-blue-400">Role</span>?
             </h2>
-            
+
             <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-              We're always looking for talented people. Send us your resume and 
+              We're always looking for talented people. Send us your resume and
               tell us how you can contribute to our team.
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2">
-                Send General Application
-                <ExternalLink className="w-5 h-5" />
-              </button>
-              <button className="px-10 py-4 bg-transparent border-2 border-gray-700 text-white font-bold rounded-xl hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105">
-                Learn About Internships
-              </button>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <a href="/general_application" className="inline-block">
+                <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer">
+                  Send General Application
+                  <ExternalLink className="w-5 h-5" />
+                </button>
+              </a>
+
+              <a href="/internships" className="inline-block">
+                <button className="px-10 py-4 bg-transparent border-2 border-gray-700 text-white font-bold rounded-xl hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105 cursor-pointer">
+                  Learn About Internships
+                </button>
+              </a>
             </div>
           </motion.div>
         </div>

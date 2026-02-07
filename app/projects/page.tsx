@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { 
+import {
   ExternalLink,
   Github,
   Globe,
@@ -102,14 +102,14 @@ export default function ProjectsPage() {
   ];
 
   const stats = [
-    { icon: Award, value: "50+", label: "Projects Completed" },
-    { icon: Users, value: "30+", label: "Happy Clients" },
+    { icon: Award, value: "20+", label: "Projects Completed" },
+    { icon: Users, value: "10+", label: "Happy Clients" },
     { icon: TrendingUp, value: "95%", label: "Client Retention" },
-    { icon: Clock, value: "1000+", label: "Development Hours" },
+    { icon: Clock, value: "500+", label: "Development Hours" },
   ];
 
-  const filteredProjects = activeFilter === "all" 
-    ? projects 
+  const filteredProjects = activeFilter === "all"
+    ? projects
     : projects.filter(project => project.category === activeFilter);
 
   return (
@@ -120,7 +120,7 @@ export default function ProjectsPage() {
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
         </div>
-        
+
         <div className="relative max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -130,14 +130,14 @@ export default function ProjectsPage() {
               <Sparkles className="w-4 h-4 text-blue-400" />
               <span className="text-blue-400 text-sm font-medium">OUR PORTFOLIO</span>
             </div>
-            
+
             <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-300 mb-6">
               Projects That
               <span className="block mt-4">Define <span className="text-blue-400">Excellence</span></span>
             </h1>
-            
+
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
-              Explore our portfolio of innovative digital solutions that have helped 
+              Explore our portfolio of innovative digital solutions that have helped
               businesses achieve remarkable growth and transformation.
             </p>
           </motion.div>
@@ -171,11 +171,10 @@ export default function ProjectsPage() {
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${
-                  activeFilter === filter.id
+                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${activeFilter === filter.id
                     ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
-                }`}
+                  }`}
               >
                 {activeFilter === filter.id && <Filter className="w-4 h-4" />}
                 {filter.label}
@@ -359,19 +358,18 @@ export default function ProjectsPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
               Ready to Start <span className="text-blue-400">Your Project</span>?
             </h2>
-            
+
             <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
               Let's discuss how we can bring your vision to life with our expertise.
             </p>
-            
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2">
-                Start Your Project
-                <ArrowUpRight className="w-5 h-5" />
-              </button>
-              <button className="px-10 py-4 bg-transparent border-2 border-gray-700 text-white font-bold rounded-xl hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105">
-                View Case Studies
-              </button>
+
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+              <a href="/contact" className="inline-block">
+                <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer">
+                  Start Your Project
+                  <ArrowUpRight className="w-5 h-5" />
+                </button>
+              </a>
             </div>
           </motion.div>
         </div>

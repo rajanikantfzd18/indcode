@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { 
+import {
   Mail,
   Phone,
   MapPin,
@@ -42,11 +42,11 @@ export default function ContactPage() {
   ];
 
   const budgetRanges = [
-    "Less than $5,000",
-    "$5,000 - $10,000",
-    "$10,000 - $25,000",
-    "$25,000 - $50,000",
-    "$50,000+",
+    "Less than ₹ 5,000",
+    "₹ 5,000 - ₹ 10,000",
+    "₹ 10,000 - ₹ 25,000",
+    "₹ 25,000 - ₹ 50,000",
+    "₹ 50,000+",
     "Not sure yet"
   ];
 
@@ -54,19 +54,19 @@ export default function ContactPage() {
     {
       icon: Mail,
       title: "Email Us",
-      details: ["hello@indcode.com", "support@indcode.com"],
+      details: ["indcodetechnologies@gmail.com"],
       color: "from-blue-500 to-cyan-500"
     },
     {
       icon: Phone,
       title: "Call Us",
-      details: ["+1 (555) 123-4567", "+1 (555) 987-6543"],
+      details: ["+91 7505243833"],
       color: "from-purple-500 to-pink-500"
     },
     {
       icon: MapPin,
       title: "Visit Us",
-      details: ["San Francisco, CA", "Remote Teams Worldwide"],
+      details: ["Indira Nagar, Lucknow, Uttar Pradesh, India"],
       color: "from-green-500 to-emerald-500"
     },
     {
@@ -80,13 +80,13 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
+
     // Simulate API call
     await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
     setIsSubmitting(false);
     setIsSubmitted(true);
-    
+
     // Reset form after 3 seconds
     setTimeout(() => {
       setIsSubmitted(false);
@@ -117,7 +117,7 @@ export default function ContactPage() {
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
         </div>
-        
+
         <div className="relative max-w-7xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -127,14 +127,14 @@ export default function ContactPage() {
               <Sparkles className="w-4 h-4 text-blue-400" />
               <span className="text-blue-400 text-sm font-medium">LET'S CONNECT</span>
             </div>
-            
+
             <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-300 mb-6">
               Start Your
               <span className="block mt-4">Digital <span className="text-blue-400">Journey</span></span>
             </h1>
-            
+
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
-              Have an idea? Let's transform it into reality. Share your vision with us, 
+              Have an idea? Let's transform it into reality. Share your vision with us,
               and we'll craft the perfect solution together.
             </p>
           </motion.div>
@@ -148,7 +148,7 @@ export default function ContactPage() {
             {/* Contact Info Cards */}
             <div>
               <h2 className="text-3xl font-bold text-white mb-12">Get in Touch</h2>
-              
+
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
                   <motion.div
@@ -160,7 +160,7 @@ export default function ContactPage() {
                     className="group bg-gray-900 rounded-2xl p-6 border border-gray-800 hover:border-blue-500/50 transition-all duration-300"
                   >
                     <div className="flex items-start gap-4">
-                      <div className={`p-3 rounded-xl bg-gradient-to-br ${info.color}`}>
+                      <div className={`p-3 rounded-xl bg-gradient-to-br ₹ {info.color}`}>
                         <info.icon className="w-6 h-6 text-white" />
                       </div>
                       <div>
@@ -181,7 +181,7 @@ export default function ContactPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="mt-12 p-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/20"
+                className="mt-12 p-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/20 hover:border-blue-500/50 transition-all duration-300"
               >
                 <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                   <Shield className="w-5 h-5 text-blue-400" />
@@ -210,7 +210,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-gray-900 rounded-2xl p-8 border border-gray-800"
+              className="bg-gray-900 rounded-2xl p-8 border border-gray-800 hover:border-blue-500/50 transition-all duration-300"
             >
               {isSubmitted ? (
                 <div className="text-center py-12">
@@ -249,7 +249,7 @@ export default function ContactPage() {
                           onChange={handleChange}
                           required
                           className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-                          placeholder="John Doe"
+                          placeholder="Your full name"
                         />
                       </div>
 
@@ -265,7 +265,7 @@ export default function ContactPage() {
                           onChange={handleChange}
                           required
                           className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-                          placeholder="john@example.com"
+                          placeholder="Your email address"
                         />
                       </div>
                     </div>
@@ -282,7 +282,7 @@ export default function ContactPage() {
                           value={formData.phone}
                           onChange={handleChange}
                           className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-                          placeholder="+1 (555) 123-4567"
+                          placeholder="+91 1234567890"
                         />
                       </div>
 
@@ -297,7 +297,7 @@ export default function ContactPage() {
                           value={formData.company}
                           onChange={handleChange}
                           className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-                          placeholder="Your company"
+                          placeholder="N/A"
                         />
                       </div>
                     </div>
@@ -459,20 +459,31 @@ export default function ContactPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
               Ready to <span className="text-blue-400">Transform</span> Your Vision?
             </h2>
-            
+
             <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-              Let's schedule a discovery call to discuss your project in detail. 
+              Let's schedule a discovery call to discuss your project in detail.
               No commitment required.
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2">
-                Schedule a Free Call
-                <ArrowRight className="w-5 h-5" />
-              </button>
-              <button className="px-10 py-4 bg-transparent border-2 border-gray-700 text-white font-bold rounded-xl hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105">
-                Download Our Brochure
-              </button>
+              {/* Schedule a Free Call button with link */}
+              <a href="/schedule_call" className="inline-block">
+                <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer">
+                  Schedule a Free Call
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </a>
+
+              {/* Download Our Brochure button with link */}
+              <a
+                href="/documents/brochure.pdf"
+                download="Indcode-Technologies-Brochure.pdf"
+                className="inline-block"
+              >
+                <button className="px-10 py-4 bg-transparent border-2 border-gray-700 text-white font-bold rounded-xl hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105 cursor-pointer">
+                  Download Our Brochure
+                </button>
+              </a>
             </div>
           </motion.div>
         </div>

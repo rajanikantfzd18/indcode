@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import {
@@ -186,18 +187,19 @@ export default function Home() {
               </p>
             </motion.div>
 
-            {/* Interactive CTA Buttons with 3D Effect */}
+            {/* Interactive CTA Buttons with 3D Effect - WITH LINKS */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.2 }}
               className="flex flex-col sm:flex-row gap-6 justify-center"
             >
-              {/* Primary Button with 3D Effect */}
+              {/* Primary Button with 3D Effect - LINK ADDED */}
               <motion.button
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative px-10 py-5 rounded-2xl overflow-hidden"
+                className="group relative px-10 py-5 rounded-2xl overflow-hidden cursor-pointer"
+                onClick={() => window.location.href = "/contact"} // LINK ADDED HERE
               >
                 {/* 3D Button Base */}
                 <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500"></div>
@@ -213,18 +215,20 @@ export default function Home() {
                   <span className="text-white font-bold text-lg">Start Your Journey</span>
                   <motion.div
                     animate={{ x: [0, 5, 0] }}
-                    transition={{ repeat: Infinity, duration: 1.5 }}
+                    transition={{ repeat: Infinity, duration: 3 }}
+                    className="group-hover:rotate-45 transition-transform duration-300" // FIXED HERE
                   >
                     <ArrowUpRight className="w-6 h-6 text-white" />
                   </motion.div>
                 </div>
               </motion.button>
 
-              {/* Secondary Button */}
+              {/* Secondary Button - LINK ADDED */}
               <motion.button
                 whileHover={{ scale: 1.05, y: -5 }}
                 whileTap={{ scale: 0.95 }}
-                className="group relative px-10 py-5 rounded-2xl border-2 border-blue-500/50 bg-transparent backdrop-blur-sm hover:bg-blue-500/10 transition-all duration-300"
+                className="group relative px-10 py-5 rounded-2xl border-2 border-blue-500/50 bg-transparent backdrop-blur-sm hover:bg-blue-500/10 transition-all duration-300 cursor-pointer"
+                onClick={() => window.location.href = "/projects"} // LINK ADDED HERE
               >
                 <span className="text-white font-bold text-lg">Explore Our Work</span>
                 <div className="absolute -bottom-1 left-1/4 w-1/2 h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -557,13 +561,18 @@ export default function Home() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="group px-10 py-5 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl font-bold text-lg hover:from-blue-500 hover:to-blue-600 transition-all duration-300 flex items-center justify-center gap-3 hover:gap-5 hover:scale-105 active:scale-95 shadow-2xl shadow-blue-500/25">
-                Start Your Journey
-                <ArrowUpRight className="w-5 h-5 group-hover:rotate-45 transition-transform" />
-              </button>
-              <button className="px-10 py-5 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-xl font-bold text-lg border border-white/20 transition-all duration-300 hover:scale-105 active:scale-95">
-                Schedule a Call
-              </button>
+              <Link href="/contact">
+                <button className="group px-10 py-5 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl font-bold text-lg hover:from-blue-500 hover:to-blue-600 transition-all duration-300 flex items-center justify-center gap-3 hover:gap-5 hover:scale-105 active:scale-95 shadow-2xl shadow-blue-500/25 cursor-pointer">
+                  Start Your Journey
+                  <ArrowUpRight className="w-5 h-5 group-hover:rotate-45 transition-transform" />
+                </button>
+              </Link>
+
+              <Link href="/schedule_call">
+                <button className="px-10 py-5 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-xl font-bold text-lg border border-white/20 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer">
+                  Schedule a Call
+                </button>
+              </Link>
             </div>
 
             {/* Trust indicators */}

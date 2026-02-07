@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { 
+import {
   Target,
   Users,
   Rocket,
@@ -53,8 +53,8 @@ export default function AboutPage() {
   ];
 
   const upcomingGoals = [
-    "Build 50 successful projects in our first year",
-    "Establish partnerships with 10+ startups",
+    "Build 20 successful projects in our first year",
+    "Establish partnerships with 5+ startups",
     "Create impactful digital solutions for local businesses",
     "Build a reputation for quality and reliability"
   ];
@@ -67,7 +67,7 @@ export default function AboutPage() {
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl"></div>
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl"></div>
         </div>
-        
+
         <div className="relative max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -78,14 +78,14 @@ export default function AboutPage() {
               <Sparkles className="w-4 h-4 text-blue-400" />
               <span className="text-blue-400 text-sm font-medium">FRESH START, BIG DREAMS</span>
             </div>
-            
+
             <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-300 mb-6">
               Building Tomorrow's
               <span className="block mt-4">Digital Landscape <span className="text-blue-400">Today</span></span>
             </h1>
-            
+
             <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
-              Indcode Technologies is a passionate new startup dedicated to helping businesses 
+              Indcode Technologies is a passionate new startup dedicated to helping businesses
               navigate the digital world with innovative, affordable, and effective solutions.
             </p>
 
@@ -129,7 +129,7 @@ export default function AboutPage() {
               >
                 OUR BEGINNING
               </motion.span>
-              
+
               <motion.h2
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -139,7 +139,7 @@ export default function AboutPage() {
               >
                 The <span className="text-blue-400">Journey</span> Begins Here
               </motion.h2>
-              
+
               <div className="mt-8 space-y-6">
                 {foundingStory.map((paragraph, index) => (
                   <motion.p
@@ -169,8 +169,8 @@ export default function AboutPage() {
               </div>
               <h3 className="text-2xl font-bold text-white mb-4">Our Promise</h3>
               <p className="text-gray-400 mb-6">
-                As a new player in the market, we bring fresh perspectives, 
-                competitive pricing, and a hunger to prove ourselves through 
+                As a new player in the market, we bring fresh perspectives,
+                competitive pricing, and a hunger to prove ourselves through
                 exceptional work and outstanding client relationships.
               </p>
               <div className="flex items-center gap-2 text-blue-400">
@@ -246,7 +246,7 @@ export default function AboutPage() {
               Meet Our <span className="text-blue-400">Core Team</span>
             </motion.h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto mt-6">
-              A compact team of dedicated professionals who wear multiple hats 
+              A compact team of dedicated professionals who wear multiple hats
               to deliver outstanding results for our clients.
             </p>
           </div>
@@ -264,7 +264,7 @@ export default function AboutPage() {
                 <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-xl font-bold mb-6 mx-auto">
                   {member.name.split(' ').map(n => n[0]).join('')}
                 </div>
-                
+
                 <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
                 <div className="text-blue-400 font-semibold mb-3">{member.role}</div>
                 <div className="text-gray-400 text-sm">{member.expertise}</div>
@@ -339,20 +339,25 @@ export default function AboutPage() {
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
               Let's <span className="text-blue-400">Grow Together</span>
             </h2>
-            
+
             <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-              As a new company, we offer personalized attention, flexible solutions, 
-              and the energy to make your project a success. 
+              As a new company, we offer personalized attention, flexible solutions,
+              and the energy to make your project a success.
               Let's build something amazing together!
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20">
-                Start Your First Project
-              </button>
-              <button className="px-10 py-4 bg-transparent border-2 border-gray-700 text-white font-bold rounded-xl hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105">
-                Schedule a Discovery Call
-              </button>
+              <a href="/contact" className="inline-block">
+                <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 cursor-pointer">
+                  Start Your First Project
+                </button>
+              </a>
+
+              <a href="/schedule_call" className="inline-block">
+                <button className="px-10 py-4 bg-transparent border-2 border-gray-700 text-white font-bold rounded-xl hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105 cursor-pointer">
+                  Schedule a Discovery Call
+                </button>
+              </a>
             </div>
 
             {/* Special Offer for Early Clients */}
@@ -368,7 +373,7 @@ export default function AboutPage() {
                 <span className="text-blue-400 font-semibold">LAUNCH SPECIAL</span>
               </div>
               <p className="text-gray-300">
-                <span className="font-bold text-white">20% OFF</span> on your first project 
+                <span className="font-bold text-white">20% OFF</span> on your first project
                 for our founding clients!
               </p>
             </motion.div>
