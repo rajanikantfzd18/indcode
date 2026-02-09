@@ -33,7 +33,7 @@ export default function CareersPage() {
       type: "Full-time",
       location: "Remote",
       experience: "3+ years",
-      salary: "$80,000 - $120,000",
+      salary: "₹ 80,000 - ₹ 120,000",
       description: "Build cutting-edge web applications using React, Next.js, and modern frontend technologies.",
       requirements: ["Expert in React & TypeScript", "Experience with Next.js", "Knowledge of modern CSS", "API integration"],
       featured: true
@@ -45,7 +45,7 @@ export default function CareersPage() {
       type: "Full-time",
       location: "Hybrid",
       experience: "2+ years",
-      salary: "$60,000 - $90,000",
+      salary: "₹ 60,000 - ₹ 90,000",
       description: "Create beautiful and intuitive user interfaces for web and mobile applications.",
       requirements: ["Proficient in Figma", "User research skills", "Prototyping", "Design systems"],
       featured: true
@@ -57,7 +57,7 @@ export default function CareersPage() {
       type: "Full-time",
       location: "Remote",
       experience: "3+ years",
-      salary: "$85,000 - $130,000",
+      salary: "₹ 85,000 - ₹ 130,000",
       description: "Build and maintain our cloud infrastructure and CI/CD pipelines.",
       requirements: ["AWS/Azure/GCP", "Docker & Kubernetes", "CI/CD tools", "Infrastructure as Code"],
       featured: false
@@ -69,7 +69,7 @@ export default function CareersPage() {
       type: "Full-time",
       location: "On-site",
       experience: "4+ years",
-      salary: "$90,000 - $140,000",
+      salary: "₹ 90,000 - ₹ 140,000",
       description: "Lead product strategy and work closely with engineering and design teams.",
       requirements: ["Product lifecycle management", "Agile methodologies", "Data analysis", "Roadmap planning"],
       featured: false
@@ -81,7 +81,7 @@ export default function CareersPage() {
       type: "Full-time",
       location: "Remote",
       experience: "2+ years",
-      salary: "$70,000 - $110,000",
+      salary: "₹ 70,000 - ₹ 110,000",
       description: "Develop scalable backend services and APIs using Node.js and modern frameworks.",
       requirements: ["Node.js/Express", "Database design", "REST/GraphQL APIs", "Microservices"],
       featured: false
@@ -93,7 +93,7 @@ export default function CareersPage() {
       type: "Full-time",
       location: "Hybrid",
       experience: "2+ years",
-      salary: "$50,000 - $80,000",
+      salary: "₹ 50,000 - ₹ 80,000",
       description: "Drive our digital marketing strategy and brand awareness campaigns.",
       requirements: ["Content creation", "SEO/SEM", "Social media", "Analytics"],
       featured: false
@@ -105,7 +105,7 @@ export default function CareersPage() {
     { icon: Clock, title: "Flexible Hours", desc: "Work when you're most productive" },
     { icon: Globe, title: "Remote Work", desc: "Work from anywhere in the world" },
     { icon: Heart, title: "Health Insurance", desc: "Comprehensive medical coverage" },
-    { icon: GraduationCap, title: "Learning Budget", desc: "$1,000 annual learning stipend" },
+    { icon: GraduationCap, title: "Learning Budget", desc: "₹ 1,000 annual learning stipend" },
     { icon: Coffee, title: "Wellness Program", desc: "Gym memberships & wellness apps" },
     { icon: Trophy, title: "Career Growth", desc: "Clear promotion paths & mentorship" },
     { icon: Award, title: "Stock Options", desc: "Own a piece of the company" },
@@ -164,7 +164,7 @@ export default function CareersPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-8 py-4 rounded-xl font-medium transition-all duration-300 flex items-center gap-3 ${activeTab === tab.id
+                className={`px-8 py-4 cursor-pointer rounded-xl font-medium transition-all duration-300 flex items-center gap-3 ${activeTab === tab.id
                     ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
                   }`}
@@ -241,10 +241,12 @@ export default function CareersPage() {
 
                     {/* Apply Button */}
                     <div>
-                      <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 flex items-center gap-2 group">
+                      <a href="/general_application" className="inline-block">
+                      <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 flex items-center gap-2 group cursor-pointer">
                         Apply Now
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </button>
+                      </a>
                     </div>
                   </div>
                 </motion.div>

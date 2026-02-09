@@ -5,6 +5,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import {
   ArrowUpRight,
+  ArrowRight,
   Code2,
   Smartphone,
   Cloud,
@@ -295,72 +296,91 @@ export default function Home() {
       </section>
 
       {/* ABOUT SECTION - ENHANCED */}
-      <section className="relative py-32 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
-        {/* Background decoration */}
+      <section className="relative py-20 md:py-25 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
+        {/* Simple gradient line */}
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500"></div>
 
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            {/* Left Content - Simple */}
             <div>
-              <motion.span
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="text-blue-600 font-semibold tracking-wider uppercase text-sm"
-              >
+              <span className="text-blue-600 font-semibold tracking-wider uppercase text-sm">
                 About Indcode
-              </motion.span>
+              </span>
 
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 }}
-                className="mt-4 text-5xl font-bold text-gray-900"
-              >
+              <h2 className="mt-4 text-4xl md:text-5xl font-bold text-gray-900">
                 Engineering Excellence in <span className="text-blue-600">Every Pixel</span> & <span className="text-blue-600">Every Line</span>
-              </motion.h2>
+              </h2>
 
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.4 }}
-                className="mt-8 text-gray-600 text-lg leading-relaxed"
-              >
+              <p className="mt-6 text-gray-600 text-lg leading-relaxed">
                 We are a technology powerhouse dedicated to crafting high-performance,
                 secure, and future-ready software products. Our fusion of robust engineering
                 practices with deep business insight delivers transformative digital experiences.
-              </motion.p>
-            </div>
+              </p>
 
-            {/* Interactive card stack */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="relative h-[500px]"
-            >
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-purple-600 rounded-3xl rotate-3"></div>
-              <div className="absolute inset-0 bg-gradient-to-tr from-gray-900 to-gray-800 rounded-3xl -rotate-3 shadow-2xl p-8 flex flex-col justify-between">
-                <div>
-                  <div className="inline-flex items-center gap-2 bg-blue-500/20 px-4 py-2 rounded-full">
-                    <Rocket className="w-4 h-4" />
-                    <span className="text-sm font-medium">Live Project</span>
-                  </div>
-                  <h3 className="mt-6 text-2xl font-bold text-white">Enterprise Dashboard</h3>
-                  <p className="mt-3 text-gray-400">Real-time analytics platform built with Next.js & Node.js</p>
+              <h2 className="mt-15 text-4xl md:text-5xl font-bold text-gray-900">
+                Our Success <span className="text-blue-600">Story</span>
+              </h2>
+
+              {/* Simple stats */}
+              <div className="mt-4 flex flex-wrap gap-6">
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-blue-600">20+</div>
+                  <div className="text-sm text-gray-600">Projects</div>
                 </div>
-                <div className="flex gap-4">
-                  {["React", "Node", "AWS", "MongoDB"].map((tech, i) => (
-                    <span key={i} className="px-3 py-1 bg-white/10 rounded-full text-sm">
-                      {tech}
-                    </span>
-                  ))}
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-purple-600">15+</div>
+                  <div className="text-sm text-gray-600">Clients</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-2xl font-bold text-cyan-600">24/7</div>
+                  <div className="text-sm text-gray-600">Support</div>
                 </div>
               </div>
-            </motion.div>
+            </div>
+
+            {/* Right Content - Interactive Card */}
+            <div className="relative h-[400px] md:h-[500px]">
+              {/* Simple shadow layer */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/90 to-purple-600/50 rounded-3xl rotate-3"></div>
+
+              {/* Main Card with hover effect */}
+              <a
+                href="/projects"
+                className="group absolute inset-0 bg-gradient-to-tr from-gray-900 to-gray-800 rounded-3xl -rotate-3 shadow-2xl p-6 md:p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-3xl"
+              >
+                {/* Shine effect on hover */}
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+
+                <div>
+                  <div className="inline-flex items-center gap-2 bg-blue-500/20 px-4 py-2 rounded-full mb-4">
+                    <Rocket className="w-4 h-4 text-blue-400" />
+                    <span className="text-sm font-medium text-white">Live Project</span>
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">Enterprise Dashboard</h3>
+                  <p className="text-gray-400">Real-time analytics platform for business intelligence and data visualization</p>
+                </div>
+
+                <div>
+                  <p className="text-gray-400 text-sm mb-3">Tech Stack:</p>
+                  <div className="flex flex-wrap gap-2">
+                    {["React.js", "Next.js", "Node.js", "Java", "Flutter", "Firebase", "Supabase", "AWS", "MongoDB"].map((tech, i) => (
+                      <span key={i} className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs md:text-sm text-gray-300 transition-colors">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* View Project Button - Hidden until hover */}
+                <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="flex items-center justify-end gap-2 text-blue-400 text-sm font-medium">
+                    View Project
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </div>
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -387,11 +407,12 @@ export default function Home() {
             </motion.h2>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-8">
+          <a href= "/services">
+          <div className="grid lg:grid-cols-3 gap-8 cursor-pointer">
             {[
               {
                 icon: Code2,
-                title: "Web Engineering",
+                title: "Web Development",
                 desc: "High-performance web applications using React, Next.js, and modern cloud architecture.",
                 features: ["SSR/SSG", "Microservices", "Real-time Features"],
                 gradient: "from-blue-500 to-cyan-500"
@@ -438,13 +459,14 @@ export default function Home() {
                   ))}
                 </div>
 
-                <button className="mt-8 text-blue-400 font-semibold flex items-center gap-2 group-hover:gap-4 transition-all">
-                  Learn More
-                  <ArrowUpRight className="w-4 h-4" />
-                </button>
+                  <button className="mt-8 text-blue-400 font-semibold flex items-center gap-2 group-hover:gap-4 transition-all cursor-pointer">
+                    Learn More
+                    <ArrowUpRight className="w-4 h-4" />
+                  </button>
               </motion.div>
             ))}
           </div>
+          </a>
         </div>
       </section>
 

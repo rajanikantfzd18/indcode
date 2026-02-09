@@ -274,7 +274,7 @@ export default function ContactPage() {
                       <div>
                         <label className="block text-gray-400 text-sm mb-2">
                           <Phone className="w-4 h-4 inline mr-2" />
-                          Phone Number
+                          Phone Number *
                         </label>
                         <input
                           type="tel"
@@ -282,7 +282,7 @@ export default function ContactPage() {
                           value={formData.phone}
                           onChange={handleChange}
                           className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-                          placeholder="+91 1234567890"
+                          placeholder="Your phone number"
                         />
                       </div>
 
@@ -297,7 +297,7 @@ export default function ContactPage() {
                           value={formData.company}
                           onChange={handleChange}
                           className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-                          placeholder="N/A"
+                          placeholder="NA if not applicable"
                         />
                       </div>
                     </div>
@@ -465,22 +465,22 @@ export default function ContactPage() {
               No commitment required.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center"> {/* Add items-center here */}
-              {/* Schedule a Free Call button with link */}
-              <a href="/schedule_call" className="inline-block w-full sm:w-auto">
-                <button className="px-8 sm:px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer w-full">
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
+              {/* Schedule a Free Call button - Less width */}
+              <a href="/schedule_call" className="w-full max-w-xs sm:w-auto">
+                <button className="w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer">
                   Schedule a Free Call
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
               </a>
 
-              {/* Download Our Brochure button with link */}
+              {/* Download Our Brochure button - Full width */}
               <a
                 href="/documents/brochure.pdf"
                 download="Indcode-Technologies-Brochure.pdf"
-                className="inline-block w-full sm:w-auto"
+                className="w-full sm:w-auto"
               >
-                <button className="px-8 sm:px-10 py-4 bg-transparent border-2 border-gray-700 text-white font-bold rounded-xl hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105 cursor-pointer w-full">
+                <button className="w-full px-8 py-4 bg-transparent border-2 border-gray-700 text-white font-bold rounded-xl hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105 cursor-pointer">
                   Download Our Brochure
                 </button>
               </a>

@@ -286,7 +286,7 @@ export default function ScheduleCallPage() {
                             onChange={handleChange}
                             required
                             className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-                            placeholder="John Doe"
+                            placeholder="Your full name"
                           />
                         </div>
                         
@@ -299,21 +299,21 @@ export default function ScheduleCallPage() {
                             onChange={handleChange}
                             required
                             className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-                            placeholder="john@example.com"
+                            placeholder="Your email address"
                           />
                         </div>
                       </div>
 
                       <div className="grid md:grid-cols-2 gap-6 mb-6">
                         <div>
-                          <label className="block text-gray-400 text-sm mb-2">Phone Number</label>
+                          <label className="block text-gray-400 text-sm mb-2">Phone Number *</label>
                           <input
                             type="tel"
                             name="phone"
                             value={formData.phone}
                             onChange={handleChange}
                             className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-                            placeholder="+91 98765 43210"
+                            placeholder="Your phone number"
                           />
                         </div>
                         
@@ -325,7 +325,7 @@ export default function ScheduleCallPage() {
                             value={formData.company}
                             onChange={handleChange}
                             className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
-                            placeholder="Your company name"
+                            placeholder="NA if not applicable"
                           />
                         </div>
                       </div>
@@ -346,7 +346,7 @@ export default function ScheduleCallPage() {
                       </div>
 
                       <div className="mb-8">
-                        <label className="block text-gray-400 text-sm mb-2">Message (Optional)</label>
+                        <label className="block text-gray-400 text-sm mb-2">Message *</label>
                         <textarea
                           name="message"
                           value={formData.message}
@@ -408,7 +408,7 @@ export default function ScheduleCallPage() {
                     <Mail className="w-5 h-5 text-blue-400" />
                     <div>
                       <div className="text-sm text-gray-400">Email</div>
-                      <div className="text-white">hello@indcode.com</div>
+                      <div className="text-white">indcodetechnologies@gmail.com</div>
                     </div>
                   </div>
                   
@@ -416,7 +416,7 @@ export default function ScheduleCallPage() {
                     <Phone className="w-5 h-5 text-blue-400" />
                     <div>
                       <div className="text-sm text-gray-400">Phone</div>
-                      <div className="text-white">+91 98765 43210</div>
+                      <div className="text-white">+91 7505243833</div>
                     </div>
                   </div>
                   

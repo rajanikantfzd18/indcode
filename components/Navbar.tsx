@@ -20,7 +20,7 @@ export default function Navbar() {
         setScrolled(isScrolled);
       }
     };
-    
+
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, [scrolled]);
@@ -66,57 +66,68 @@ export default function Navbar() {
     { href: "/services", label: "Services" },
     { href: "/projects", label: "Projects" },
     { href: "/about", label: "About" },
-    { href: "/careers", label: "Careers"},
+    { href: "/careers", label: "Careers" },
     { href: "/contact", label: "Contact" },
   ];
 
   return (
     <>
       <header
-        className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          scrolled 
-            ? "bg-black/95 backdrop-blur-xl py-3 shadow-2xl shadow-blue-900/10 border-b border-gray-800/50" 
-            : "bg-gradient-to-b from-black/50 to-transparent py-5"
-        }`}
+        className={`fixed top-0 w-full z-50 
+    transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+    ${scrolled && !mobileMenuOpen
+            ? "bg-black/95 backdrop-blur-xl py-3"
+            : "bg-transparent backdrop-blur-0 py-5"
+          }`}
       >
         <nav className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          {/* Animated Logo/Brand */}
-          <Link 
-            href="/" 
-            className="group relative flex items-center gap-2"
-            onMouseEnter={() => setHoveredLink('logo')}
-            onMouseLeave={() => setHoveredLink(null)}
-          >
-            {/* Animated border effect */}
-            <div className="relative">
-              <div className={`absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg blur opacity-0 group-hover:opacity-70 transition-opacity duration-500`}></div>
-              <div className="relative bg-gray-900 rounded-lg p-2">
-                <div className="flex items-center gap-2">
-                  {/* Logo Icon */}
-                  <div className="relative">
-                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
-                      <span className="font-bold text-white text-sm">IT</span>
+          {/* Show logo only when mobile menu is closed */}
+          {!mobileMenuOpen && (
+            <Link
+              href="/"
+              className="group relative flex items-center gap-2"
+              onMouseEnter={() => setHoveredLink('logo')}
+              onMouseLeave={() => setHoveredLink(null)}
+            >
+              {/* Animated border effect */}
+              <div className="relative">
+                <div className={`absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg blur opacity-0 group-hover:opacity-70 transition-opacity duration-500`}></div>
+                <div className="relative bg-gray-900 rounded-lg p-2">
+                  <div className="flex items-center gap-2">
+                    {/* Logo Icon */}
+                    <div className="relative">
+                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
+                        <span className="font-bold text-white text-sm">IT</span>
+                      </div>
+                      {/* Pulsing dot */}
+                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse">
+                        <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-75"></div>
+                      </div>
                     </div>
-                    {/* Pulsing dot */}
-                    <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse">
-                      <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-75"></div>
+
+                    {/* Text with cursor */}
+                    <div className="flex items-baseline">
+                      <span className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                        {text}
+                      </span>
+                      <span className="cursor ml-0.5 text-blue-400">|</span>
+                      <span className="ml-2 text-sm text-gray-400 font-light hidden sm:block">
+                        Technologies
+                      </span>
                     </div>
-                  </div>
-                  
-                  {/* Text with cursor */}
-                  <div className="flex items-baseline">
-                    <span className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
-                      {text}
-                    </span>
-                    <span className="cursor ml-0.5 text-blue-400">|</span>
-                    <span className="ml-2 text-sm text-gray-400 font-light hidden sm:block">
-                      Technologies
-                    </span>
                   </div>
                 </div>
               </div>
+            </Link>
+          )}
+
+          {/* Show placeholder when mobile menu is open to maintain layout */}
+          {mobileMenuOpen && (
+            <div className="invisible">
+              {/* Invisible placeholder to maintain layout */}
+              <div className="w-8 h-8 bg-gray-900 rounded-lg p-2"></div>
             </div>
-          </Link>
+          )}
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8">
@@ -128,26 +139,23 @@ export default function Navbar() {
                 onMouseEnter={() => setHoveredLink(link.href)}
                 onMouseLeave={() => setHoveredLink(null)}
               >
-                <span className={`text-sm font-medium transition-all duration-300 ${
-                  hoveredLink === link.href 
-                    ? 'text-white' 
-                    : 'text-gray-300 hover:text-white'
-                }`}>
+                <span className={`text-sm font-medium transition-all duration-300 ${hoveredLink === link.href
+                  ? 'text-white'
+                  : 'text-gray-300 hover:text-white'
+                  }`}>
                   {link.label}
                 </span>
-                
+
                 {/* Animated underline */}
-                <div className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-300 ${
-                  hoveredLink === link.href ? 'w-full' : 'w-0 group-hover:w-full'
-                }`}></div>
-                
+                <div className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-300 ${hoveredLink === link.href ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></div>
+
                 {/* Hover effect dot */}
-                <div className={`absolute -top-2 -right-2 w-2 h-2 bg-blue-500 rounded-full transition-all duration-300 ${
-                  hoveredLink === link.href ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
-                }`}></div>
+                <div className={`absolute -top-2 -right-2 w-2 h-2 bg-blue-500 rounded-full transition-all duration-300 ${hoveredLink === link.href ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+                  }`}></div>
               </Link>
             ))}
-            
+
             {/* CTA Button */}
             <Link
               href="/contact"
@@ -179,23 +187,21 @@ export default function Navbar() {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-40 md:hidden transition-all duration-500 ${
-          mobileMenuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 z-40 md:hidden transition-all duration-500 ${mobileMenuOpen
+          ? "opacity-100 pointer-events-auto"
+          : "opacity-0 pointer-events-none"
+          }`}
       >
         {/* Backdrop */}
         <div
           className="absolute inset-0 bg-black/80 backdrop-blur-sm"
           onClick={() => setMobileMenuOpen(false)}
         />
-        
+
         {/* Menu Panel */}
         <div
-          className={`absolute top-0 right-0 h-full w-80 bg-gradient-to-b from-gray-900 to-black border-l border-gray-800 shadow-2xl transition-transform duration-500 ${
-            mobileMenuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+          className={`absolute top-0 right-0 h-full w-80 bg-gradient-to-b from-gray-900 to-black border-l border-gray-800 shadow-2xl transition-transform duration-500 ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+            }`}
         >
           <div className="p-8 h-full flex flex-col">
             {/* Mobile Logo */}
@@ -238,7 +244,7 @@ export default function Navbar() {
               >
                 Start Your Project
               </Link>
-              
+
               {/* Contact Info */}
               <div className="mt-8 space-y-3 text-sm text-gray-400">
                 <div><a href="mailto:indcodetechnologies@gmail.com">📧 indcodetechnologies@gmail.com</a></div>
@@ -251,7 +257,7 @@ export default function Navbar() {
 
       {/* Scroll Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 z-50">
-        <div 
+        <div
           className="h-full bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 transition-all duration-300"
           style={{ width: `${scrollProgress}%` }}
         />
