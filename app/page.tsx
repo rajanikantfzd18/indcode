@@ -560,16 +560,16 @@ export default function Home() {
               scalable, high-impact digital product. Your success is our mission.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Link href="/contact">
-                <button className="group px-10 py-5 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl font-bold text-lg hover:from-blue-500 hover:to-blue-600 transition-all duration-300 flex items-center justify-center gap-3 hover:gap-5 hover:scale-105 active:scale-95 shadow-2xl shadow-blue-500/25 cursor-pointer">
+                <button className="group px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl font-bold text-lg hover:from-blue-500 hover:to-blue-600 transition-all duration-300 flex items-center justify-center gap-3 hover:gap-5 hover:scale-105 active:scale-95 shadow-2xl shadow-blue-500/25 cursor-pointer w-full sm:w-auto">
                   Start Your Journey
                   <ArrowUpRight className="w-5 h-5 group-hover:rotate-45 transition-transform" />
                 </button>
               </Link>
 
-              <Link href="/schedule_call">
-                <button className="px-10 py-5 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-xl font-bold text-lg border border-white/20 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer">
+              <Link href="/schedule_call" className="w-full sm:w-auto">
+                <button className="w-full px-8 sm:px-10 py-4 sm:py-5 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-xl font-bold text-lg border border-white/20 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer">
                   Schedule a Call
                 </button>
               </Link>

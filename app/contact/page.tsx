@@ -465,10 +465,10 @@ export default function ContactPage() {
               No commitment required.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center"> {/* Add items-center here */}
               {/* Schedule a Free Call button with link */}
-              <a href="/schedule_call" className="inline-block">
-                <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer">
+              <a href="/schedule_call" className="inline-block w-full sm:w-auto">
+                <button className="px-8 sm:px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer w-full">
                   Schedule a Free Call
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -478,9 +478,9 @@ export default function ContactPage() {
               <a
                 href="/documents/brochure.pdf"
                 download="Indcode-Technologies-Brochure.pdf"
-                className="inline-block"
+                className="inline-block w-full sm:w-auto"
               >
-                <button className="px-10 py-4 bg-transparent border-2 border-gray-700 text-white font-bold rounded-xl hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105 cursor-pointer">
+                <button className="px-8 sm:px-10 py-4 bg-transparent border-2 border-gray-700 text-white font-bold rounded-xl hover:border-blue-500 hover:bg-blue-500/10 transition-all duration-300 hover:scale-105 cursor-pointer w-full">
                   Download Our Brochure
                 </button>
               </a>

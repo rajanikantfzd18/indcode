@@ -241,8 +241,8 @@ export default function Navbar() {
               
               {/* Contact Info */}
               <div className="mt-8 space-y-3 text-sm text-gray-400">
-                <div>📧 hello@indcode.com</div>
-                <div>📞 +91 98765 43210</div>
+                <div><a href="mailto:indcodetechnologies@gmail.com">📧 indcodetechnologies@gmail.com</a></div>
+                <div><a href="tel:+917505243833">📞 +91 7505243833</a></div>
               </div>
             </div>
           </div>

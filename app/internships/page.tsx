@@ -197,8 +197,8 @@ export default function InternshipsPage() {
                 
                 {/* Apply Button */}
                 <Link 
-                  href={`/apply-internship/${program.id}`}
-                  className="block w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-center transition-colors"
+                  href="/general_application"
+                  className="block w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-center transition-colors cursor-pointer"
                 >
                   Apply Now
                 </Link>
