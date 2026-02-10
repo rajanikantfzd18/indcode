@@ -204,11 +204,10 @@ export default function ServicesPage() {
             <button
               key={category.id}
               onClick={() => setActiveTab(category.id)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ₹ {
-                activeTab === category.id
+              className={`px-6 py-3 cursor-pointer rounded-full font-medium transition-all duration-300 ${activeTab === category.id
                   ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
                   : "bg-gray-900 text-gray-300 hover:bg-gray-800 border border-gray-800"
-              }`}
+                }`}
             >
               {category.label}
             </button>

@@ -171,7 +171,7 @@ export default function ProjectsPage() {
               <button
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
-                className={`px-6 py-3 rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${activeFilter === filter.id
+                className={`px-6 py-3 cursor-pointer rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${activeFilter === filter.id
                     ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
                   }`}
