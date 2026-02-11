@@ -1,623 +1,267 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import {
-  ArrowUpRight,
-  ArrowRight,
-  Code2,
-  Smartphone,
-  Cloud,
-  CheckCircle,
-  Sparkles,
-  Rocket,
-  Shield,
-  Zap,
-  Users,
-  BarChart3,
-  Globe
-} from "lucide-react";
+import { useEffect, useState } from "react";
+import { Menu, X, ChevronRight } from "lucide-react";
 
-export default function Home() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
+export default function Navbar() {
+  const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [text, setText] = useState("");
+  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  const fullText = "Indcode";
+  const [scrollProgress, setScrollProgress] = useState(0);
 
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
+  // Enhanced scroll effect with threshold
+  useEffect(() => {
+    const onScroll = () => {
+      const isScrolled = window.scrollY > 20;
+      if (isScrolled !== scrolled) {
+        setScrolled(isScrolled);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [scrolled]);
+
+  // Typewriter animation with smooth reveal
+  useEffect(() => {
+    let index = 0;
+    const typeSpeed = 100;
+    const cursorBlink = () => {
+      const cursor = document.querySelector('.cursor');
+      if (cursor) {
+        cursor.classList.toggle('opacity-0');
+      }
+    };
+
+    const typingInterval = setInterval(() => {
+      setText(fullText.slice(0, index + 1));
+      index++;
+      if (index === fullText.length) {
+        clearInterval(typingInterval);
+        // Start cursor blink after typing completes
+        setInterval(cursorBlink, 500);
+      }
+    }, typeSpeed);
+
+    return () => clearInterval(typingInterval);
+  }, []);
+
+  // Prevent body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [mobileMenuOpen]);
+
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/services", label: "Services" },
+    { href: "/projects", label: "Projects" },
+    { href: "/about", label: "About" },
+    { href: "/careers", label: "Careers" },
+    { href: "/contact", label: "Contact" },
+  ];
 
   return (
-    <main className="overflow-hidden" ref={containerRef}>
-      {/* HERO SECTION WITH PARALLAX */}
-      <section className="relative min-h-screen pt-30 pb-40 flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-blue-950 overflow-hidden">
-        {/* Animated 3D Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          {/* Floating 3D Shapes */}
-          <motion.div
-            animate={{
-              x: [0, 100, 0],
-              y: [0, -50, 0],
-              rotate: [0, 180, 360]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 20,
-              ease: "linear"
-            }}
-            className="absolute top-1/4 left-1/4 w-64 h-64"
-          >
-            <div className="w-full h-full bg-gradient-to-br from-blue-500/20 to-cyan-400/10 rounded-full blur-2xl"></div>
-          </motion.div>
-
-          <motion.div
-            animate={{
-              x: [0, -80, 0],
-              y: [0, 60, 0],
-              rotate: [360, 180, 0]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 25,
-              ease: "linear"
-            }}
-            className="absolute bottom-1/4 right-1/4 w-80 h-80"
-          >
-            <div className="w-full h-full bg-gradient-to-tr from-purple-500/15 to-pink-500/10 rounded-full blur-2xl"></div>
-          </motion.div>
-
-          {/* Pulsing Rings */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.1, 0.3] }}
-              transition={{ repeat: Infinity, duration: 4 }}
-              className="absolute w-[800px] h-[800px] border border-blue-500/20 rounded-full"
-            />
-            <motion.div
-              animate={{ scale: [1, 1.4, 1], opacity: [0.2, 0.05, 0.2] }}
-              transition={{ repeat: Infinity, duration: 5, delay: 0.5 }}
-              className="absolute w-[1000px] h-[1000px] border border-cyan-400/15 rounded-full"
-            />
-          </div>
-
-          {/* Grid with Perspective */}
-          <div className="absolute inset-0 opacity-10 transform-gpu">
-            <div
-              className="h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:4rem_4rem]"
-              style={{
-                transform: 'perspective(500px) rotateX(60deg)',
-                transformOrigin: 'center'
-              }}
-            />
-          </div>
-
-          {/* Animated Code Particles */}
-          <div className="absolute inset-0">
-            {[...Array(20)].map((_, i) => (
-              <motion.div
-                key={i}
-                animate={{
-                  y: [0, -1000],
-                  x: Math.sin(i) * 100,
-                  opacity: [0, 1, 0]
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 3 + Math.random() * 2,
-                  delay: i * 0.1
-                }}
-                className="absolute text-blue-400/20 text-xl font-mono"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-              >
-                {i % 2 === 0 ? '<>' : '</>'}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Main Content with 3D Effect */}
-        <div className="relative z-10 px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="text-center max-w-6xl"
-          >
-            {/* Company Name with 3D Text Effect */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-              className="mb-12"
+    <>
+      <header
+        className={`fixed top-0 w-full z-50 
+    transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+    ${scrolled && !mobileMenuOpen
+            ? "bg-black/95 backdrop-blur-xl py-3"
+            : "bg-transparent backdrop-blur-0 py-5"
+          }`}
+      >
+        <nav className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+          {/* Show logo only when mobile menu is closed */}
+          {!mobileMenuOpen && (
+            <Link
+              href="/"
+              className="group relative flex items-center gap-2"
+              onMouseEnter={() => setHoveredLink('logo')}
+              onMouseLeave={() => setHoveredLink(null)}
             >
-              <div className="relative inline-block">
-                {/* 3D Shadow Effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 blur-2xl opacity-50"></div>
-                <div className="relative">
-                  <h1 className="text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter">
-                    <span className="bg-gradient-to-r from-white via-blue-100 to-cyan-200 bg-clip-text text-transparent">
-                      INDCODE
-                    </span>
-                  </h1>
-                  <motion.div
-                    animate={{
-                      textShadow: [
-                        "0 0 20px rgba(59, 130, 246, 0.5)",
-                        "0 0 40px rgba(59, 130, 246, 0.8)",
-                        "0 0 20px rgba(59, 130, 246, 0.5)"
-                      ]
-                    }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    className="text-2xl sm:text-3xl md:text-4xl font-bold mt-4 text-cyan-300"
-                  >
-                    TECHNOLOGIES
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
+              {/* Animated border effect */}
+              <div className="relative">
+                <div className={`absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg blur opacity-0 group-hover:opacity-70 transition-opacity duration-500`}></div>
+                <div className="relative bg-gray-900 rounded-lg p-2">
+                  <div className="flex items-center gap-2">
+                    {/* Logo Icon */}
+                    <div className="relative">
+                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
+                        <span className="font-bold text-white text-sm">IT</span>
+                      </div>
+                      {/* Pulsing dot */}
+                      <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full animate-pulse">
+                        <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-75"></div>
+                      </div>
+                    </div>
 
-            {/* Animated Description */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-              className="max-w-3xl mx-auto mb-16"
-            >
-              <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-                We craft{" "}
-                <motion.span
-                  animate={{ color: ['#60a5fa', '#22d3ee', '#60a5fa'] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                  className="font-bold"
-                >
-                  cutting-edge digital solutions
-                </motion.span>{" "}
-                that transform businesses and create{" "}
-                <motion.span
-                  animate={{ color: ['#22d3ee', '#60a5fa', '#22d3ee'] }}
-                  transition={{ repeat: Infinity, duration: 2, delay: 0.5 }}
-                  className="font-bold"
-                >
-                  lasting impact
-                </motion.span>
-              </p>
-            </motion.div>
-
-            {/* Interactive CTA Buttons with 3D Effect - WITH LINKS */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 }}
-              className="flex flex-col sm:flex-row gap-6 justify-center"
-            >
-              {/* Primary Button with 3D Effect - LINK ADDED */}
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative px-10 py-5 rounded-2xl overflow-hidden cursor-pointer"
-                onClick={() => window.location.href = "/contact"} // LINK ADDED HERE
-              >
-                {/* 3D Button Base */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500"></div>
-                {/* 3D Top Layer */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-400 translate-y-1 group-hover:translate-y-0 transition-transform"></div>
-                {/* Shine Effect */}
-                <motion.div
-                  animate={{ x: ['-100%', '200%'] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                />
-                <div className="relative z-10 flex items-center justify-center gap-3">
-                  <span className="text-white font-bold text-lg">Start Your Journey</span>
-                  <motion.div
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ repeat: Infinity, duration: 3 }}
-                    className="group-hover:rotate-45 transition-transform duration-300" // FIXED HERE
-                  >
-                    <ArrowUpRight className="w-6 h-6 text-white" />
-                  </motion.div>
-                </div>
-              </motion.button>
-
-              {/* Secondary Button - LINK ADDED */}
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative px-10 py-5 rounded-2xl border-2 border-blue-500/50 bg-transparent backdrop-blur-sm hover:bg-blue-500/10 transition-all duration-300 cursor-pointer"
-                onClick={() => window.location.href = "/projects"} // LINK ADDED HERE
-              >
-                <span className="text-white font-bold text-lg">Explore Our Work</span>
-                <div className="absolute -bottom-1 left-1/4 w-1/2 h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </motion.button>
-            </motion.div>
-          </motion.div>
-        </div>
-
-        {/* Advanced Scroll Indicator */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 1.5 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="flex flex-col items-center">
-            <div className="text-xs text-blue-400 mb-2 font-mono tracking-widest">
-              SCROLL TO EXPLORE
-            </div>
-            <div className="relative">
-              {/* Outer Pulse */}
-              <motion.div
-                animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                className="absolute -inset-2 border border-blue-400/30 rounded-full"
-              />
-              {/* Scroll Wheel */}
-              <div className="w-6 h-10 border-2 border-blue-400/50 rounded-full flex justify-center items-start p-1">
-                <motion.div
-                  animate={{ y: [0, 12, 0] }}
-                  transition={{ repeat: Infinity, duration: 1.5 }}
-                  className="w-1.5 h-3 bg-gradient-to-b from-blue-400 to-cyan-300 rounded-full"
-                />
-              </div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Floating Tech Icons */}
-        <div className="absolute inset-0 pointer-events-none">
-          {['</>', '{ }', '[]', '=>', ';', '()', '==', '!=='].map((icon, i) => (
-            <motion.div
-              key={i}
-              animate={{
-                y: [0, -20, 0],
-                x: Math.sin(i) * 10,
-                rotate: [0, 360],
-                opacity: [0.3, 0.7, 0.3]
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 3 + i,
-                delay: i * 0.5
-              }}
-              className="absolute text-blue-400/30 font-mono text-2xl"
-              style={{
-                left: `${10 + (i * 12)}%`,
-                top: `${20 + (i * 7)}%`,
-              }}
-            >
-              {icon}
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* ABOUT SECTION - ENHANCED */}
-      <section className="relative py-20 md:py-25 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
-        {/* Simple gradient line */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500"></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            {/* Left Content - Simple */}
-            <div>
-              <span className="text-blue-600 font-semibold tracking-wider uppercase text-sm">
-                About Indcode
-              </span>
-
-              <h2 className="mt-4 text-4xl md:text-5xl font-bold text-gray-900">
-                Engineering Excellence in <span className="text-blue-600">Every Pixel</span> & <span className="text-blue-600">Every Line</span>
-              </h2>
-
-              <p className="mt-6 text-gray-600 text-lg leading-relaxed">
-                We are a technology powerhouse dedicated to crafting high-performance,
-                secure, and future-ready software products. Our fusion of robust engineering
-                practices with deep business insight delivers transformative digital experiences.
-              </p>
-
-              <h2 className="mt-15 text-4xl md:text-5xl font-bold text-gray-900">
-                Our Success <span className="text-blue-600">Story</span>
-              </h2>
-
-              {/* Simple stats */}
-              <div className="mt-4 flex flex-wrap gap-6">
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-blue-600">20+</div>
-                  <div className="text-sm text-gray-600">Projects</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-purple-600">15+</div>
-                  <div className="text-sm text-gray-600">Clients</div>
-                </div>
-                <div className="text-center">
-                  <div className="text-2xl font-bold text-cyan-600">24/7</div>
-                  <div className="text-sm text-gray-600">Support</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right Content - Interactive Card */}
-            <div className="relative h-[400px] md:h-[500px]">
-              {/* Simple shadow layer */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/90 to-purple-600/50 rounded-3xl rotate-3"></div>
-
-              {/* Main Card with hover effect */}
-              <a
-                href="/projects"
-                className="group absolute inset-0 bg-gradient-to-tr from-gray-900 to-gray-800 rounded-3xl -rotate-3 shadow-2xl p-6 md:p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-3xl"
-              >
-                {/* Shine effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
-
-                <div>
-                  <div className="inline-flex items-center gap-2 bg-blue-500/20 px-4 py-2 rounded-full mb-4">
-                    <Rocket className="w-4 h-4 text-blue-400" />
-                    <span className="text-sm font-medium text-white">Live Project</span>
-                  </div>
-                  <h3 className="text-xl md:text-2xl font-bold text-white mb-3">Enterprise Dashboard</h3>
-                  <p className="text-gray-400">Real-time analytics platform for business intelligence and data visualization</p>
-                </div>
-
-                <div>
-                  <p className="text-gray-400 text-sm mb-3">Tech Stack:</p>
-                  <div className="flex flex-wrap gap-2">
-                    {["React.js", "Next.js", "Node.js", "Java", "Flutter", "Firebase", "Supabase", "AWS", "MongoDB"].map((tech, i) => (
-                      <span key={i} className="px-3 py-1 bg-white/10 hover:bg-white/20 rounded-full text-xs md:text-sm text-gray-300 transition-colors">
-                        {tech}
+                    {/* Text with cursor */}
+                    <div className="flex items-baseline">
+                      <span className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                        {text}
                       </span>
-                    ))}
+                      <span className="cursor ml-0.5 text-blue-400">|</span>
+                      <span className="ml-2 text-sm text-gray-400 font-light hidden sm:block">
+                        Technologies
+                      </span>
+                    </div>
                   </div>
                 </div>
+              </div>
+            </Link>
+          )}
 
-                {/* View Project Button - Hidden until hover */}
-                <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="flex items-center justify-end gap-2 text-blue-400 text-sm font-medium">
-                    View Project
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </div>
-                </div>
-              </a>
+          {/* Show placeholder when mobile menu is open to maintain layout */}
+          {mobileMenuOpen && (
+            <div className="invisible">
+              {/* Invisible placeholder to maintain layout */}
+              <div className="w-8 h-8 bg-gray-900 rounded-lg p-2"></div>
             </div>
-          </div>
-        </div>
-      </section>
+          )}
 
-      {/* SERVICES - ENHANCED */}
-      <section className="py-22 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <motion.span
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-blue-400 font-semibold tracking-wider uppercase text-sm"
-            >
-              Our Expertise
-            </motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mt-4 text-5xl font-bold text-white"
-            >
-              Full-Spectrum <span className="text-blue-400">Digital Solutions</span>
-            </motion.h2>
-          </div>
-
-          <a href= "/services">
-          <div className="grid lg:grid-cols-3 gap-8 cursor-pointer">
-            {[
-              {
-                icon: Code2,
-                title: "Web Development",
-                desc: "High-performance web applications using React, Next.js, and modern cloud architecture.",
-                features: ["SSR/SSG", "Microservices", "Real-time Features"],
-                gradient: "from-blue-500 to-cyan-500"
-              },
-              {
-                icon: Smartphone,
-                title: "App Development",
-                desc: "Native & cross-platform mobile apps with Flutter & React Native for seamless experiences.",
-                features: ["iOS & Android", "Offline Support", "App Store Deployment"],
-                gradient: "from-purple-500 to-pink-500"
-              },
-              {
-                icon: Cloud,
-                title: "SaaS & Automation",
-                desc: "Custom SaaS platforms and intelligent workflow automation systems. Built for scale and security.",
-                features: ["Multi-tenant", "API Integration", "Auto-scaling"],
-                gradient: "from-green-500 to-emerald-500"
-              }
-            ].map((service, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.2 }}
-                whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                className="group relative bg-gray-800 rounded-2xl p-8 hover:bg-gray-800/50 backdrop-blur-sm border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="relative group"
+                onMouseEnter={() => setHoveredLink(link.href)}
+                onMouseLeave={() => setHoveredLink(null)}
               >
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.gradient} rounded-full filter blur-3xl opacity-10 group-hover:opacity-20 transition-opacity`}></div>
+                <span className={`text-sm font-medium transition-all duration-300 ${hoveredLink === link.href
+                  ? 'text-white'
+                  : 'text-gray-300 hover:text-white'
+                  }`}>
+                  {link.label}
+                </span>
 
-                <div className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${service.gradient} mb-6`}>
-                  <service.icon className="w-8 h-8 text-white" />
-                </div>
+                {/* Animated underline */}
+                <div className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-300 ${hoveredLink === link.href ? 'w-full' : 'w-0 group-hover:w-full'
+                  }`}></div>
 
-                <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
-                <p className="text-gray-400 mb-6">{service.desc}</p>
-
-                <div className="space-y-3">
-                  {service.features.map((feature, j) => (
-                    <div key={j} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span className="text-sm text-gray-300">{feature}</span>
-                    </div>
-                  ))}
-                </div>
-
-                  <button className="mt-8 text-blue-400 font-semibold flex items-center gap-2 group-hover:gap-4 transition-all cursor-pointer">
-                    Learn More
-                    <ArrowUpRight className="w-4 h-4" />
-                  </button>
-              </motion.div>
+                {/* Hover effect dot */}
+                <div className={`absolute -top-2 -right-2 w-2 h-2 bg-blue-500 rounded-full transition-all duration-300 ${hoveredLink === link.href ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+                  }`}></div>
+              </Link>
             ))}
-          </div>
-          </a>
-        </div>
-      </section>
 
-      {/* PROCESS - ENHANCED */}
-      <section className="relative py-22 bg-black overflow-hidden">
-        {/* Animated background */}
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]"></div>
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e5_1px,transparent_1px),linear-gradient(to_bottom,#4f46e5_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-5"></div>
-        </div>
-
-        <div className="relative max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
-            <motion.span
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              className="text-blue-400 font-semibold tracking-wider uppercase text-sm"
+            {/* CTA Button */}
+            <Link
+              href="/contact"
+              className="group relative overflow-hidden px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 active:scale-95"
             >
-              How We Work
-            </motion.span>
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="mt-4 text-5xl font-bold text-white"
-            >
-              Our <span className="text-blue-400">Proven</span> Process
-            </motion.h2>
+              <span className="relative z-10 text-white font-semibold text-sm flex items-center gap-2">
+                Get Started
+                <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </span>
+              {/* Shine effect */}
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+            </Link>
           </div>
 
-          <div className="relative">
-            {/* Connection line */}
-            <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 hidden lg:block"></div>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden relative z-60 p-2 rounded-lg bg-gray-900/50 backdrop-blur-sm border border-gray-700"
+            aria-label="Toggle menu"
+          >
+            {mobileMenuOpen ? (
+              <X className="w-6 h-6 text-white" />
+            ) : (
+              <Menu className="w-6 h-6 text-white" />
+            )}
+          </button>
+        </nav>
+      </header>
 
-            <div className="grid lg:grid-cols-4 gap-8 lg:gap-4">
-              {[
-                {
-                  number: "01",
-                  title: "Discover",
-                  desc: "Deep dive into requirements, market research, and solution architecture planning.",
-                  icon: Users
-                },
-                {
-                  number: "02",
-                  title: "Design",
-                  desc: "UI/UX prototyping, system design, and technical specifications.",
-                  icon: BarChart3
-                },
-                {
-                  number: "03",
-                  title: "Build",
-                  desc: "Agile development with continuous integration and quality assurance.",
-                  icon: Code2
-                },
-                {
-                  number: "04",
-                  title: "Scale",
-                  desc: "Deployment, monitoring, optimization, and ongoing support.",
-                  icon: Rocket
-                }
-              ].map((step, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.15 }}
-                  className="relative"
+      {/* Mobile Menu Overlay */}
+      <div
+        className={`fixed inset-0 z-40 md:hidden transition-all duration-500 ${mobileMenuOpen
+          ? "opacity-100 pointer-events-auto"
+          : "opacity-0 pointer-events-none"
+          }`}
+      >
+        {/* Backdrop */}
+        <div
+          className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+          onClick={() => setMobileMenuOpen(false)}
+        />
+
+        {/* Menu Panel */}
+        <div
+          className={`absolute top-0 right-0 h-full w-80 bg-gradient-to-b from-gray-900 to-black border-l border-gray-800 shadow-2xl transition-transform duration-500 ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+            }`}
+        >
+          <div className="p-8 h-full flex flex-col">
+            {/* Mobile Logo */}
+            <div className="mb-12">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
+                  <span className="font-bold text-white text-lg">IT</span>
+                </div>
+                <div>
+                  <div className="text-xl font-bold text-white">Indcode</div>
+                  <div className="text-sm text-gray-400">Technologies</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Links */}
+            <div className="space-y-4 flex-1">
+              {navLinks.map((link, index) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="group flex items-center justify-between p-4 rounded-xl hover:bg-gray-800/50 transition-all duration-300"
+                  style={{ transitionDelay: `${index * 50}ms` }}
                 >
-                  <div className="bg-gray-900 rounded-2xl p-8 border border-gray-800 hover:border-blue-500/50 transition-all duration-300 group hover:bg-gray-900/50 backdrop-blur-sm">
-                    <div className="text-6xl font-bold text-gray-800 group-hover:text-gray-700 transition-colors">
-                      {step.number}
-                    </div>
-                    <div className="inline-flex p-3 rounded-lg bg-blue-500/20 border border-blue-500/30 mt-6 mb-4">
-                      <step.icon className="w-6 h-6 text-blue-400" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-white mb-3">{step.title}</h3>
-                    <p className="text-gray-400">{step.desc}</p>
-                  </div>
-                </motion.div>
+                  <span className="text-lg font-medium text-gray-200 group-hover:text-white">
+                    {link.label}
+                  </span>
+                  <ChevronRight className="w-5 h-5 text-gray-400 group-hover:text-blue-400 group-hover:translate-x-2 transition-transform" />
+                </Link>
               ))}
             </div>
+
+            {/* Mobile CTA */}
+            <div className="pt-8 border-t border-gray-800">
+              <Link
+                href="/contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full text-center py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+              >
+                Start Your Project
+              </Link>
+
+              {/* Contact Info */}
+              <div className="mt-8 space-y-3 text-sm text-gray-400">
+                <div><a href="mailto:indcodetechnologies@gmail.com">📧 indcodetechnologies@gmail.com</a></div>
+                <div><a href="tel:+917505243833">📞 +91 7505243833</a></div>
+              </div>
+            </div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* CTA - ENHANCED */}
-      <section className="relative py-22 bg-gradient-to-br from-gray-900 to-black overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
-        </div>
-
-        <div className="relative max-w-4xl mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="inline-flex items-center gap-2 bg-blue-500/20 backdrop-blur-sm border border-blue-500/30 px-6 py-3 rounded-full mb-8">
-              <Zap className="w-4 h-4 text-blue-400" />
-              <span className="text-blue-400 text-sm font-medium">Ready to Transform?</span>
-            </div>
-
-            <h2 className="text-6xl font-bold text-white mb-8">
-              Let's Build Something <span className="text-blue-400">Extraordinary</span>
-            </h2>
-
-            <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-              Partner with Indcode Technologies to transform your vision into a
-              scalable, high-impact digital product. Your success is our mission.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <Link href="/contact">
-                <button className="group px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl font-bold text-lg hover:from-blue-500 hover:to-blue-600 transition-all duration-300 flex items-center justify-center gap-3 hover:gap-5 hover:scale-105 active:scale-95 shadow-2xl shadow-blue-500/25 cursor-pointer w-full sm:w-auto">
-                  Start Your Journey
-                  <ArrowUpRight className="w-5 h-5 group-hover:rotate-45 transition-transform" />
-                </button>
-              </Link>
-
-              <Link href="/schedule_call" className="w-full sm:w-auto">
-                <button className="w-full px-8 sm:px-10 py-4 sm:py-5 bg-white/10 backdrop-blur-sm hover:bg-white/20 rounded-xl font-bold text-lg border border-white/20 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer">
-                  Schedule a Call
-                </button>
-              </Link>
-            </div>
-
-            {/* Trust indicators */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.3 }}
-              className="mt-16 pt-8 border-t border-white/10"
-            >
-              <p className="text-gray-400 mb-6">Trusted by innovative teams worldwide</p>
-              <div className="flex flex-wrap justify-center gap-12 opacity-50">
-                {["Startups", "Enterprises", "Agencies", "Scale-ups"].map((client, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <Shield className="w-5 h-5 text-blue-400" />
-                    <span className="text-gray-300 font-medium">{client}</span>
-                  </div>
-                ))}
-              </div>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-    </main>
+      {/* Scroll Progress Bar */}
+      <div className="fixed top-0 left-0 right-0 h-1 z-50">
+        <div
+          className="h-full bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 transition-all duration-300"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      </div>
+    </>
   );
 }
