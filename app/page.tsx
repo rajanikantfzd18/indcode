@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion, useReducedMotion } from "framer-motion";
+import { useEffect, useState } from "react";
 import {
   ArrowUpRight,
   ArrowRight,
@@ -20,222 +20,121 @@ import {
 } from "lucide-react";
 
 export default function Home() {
-  const containerRef = useRef(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
+  const shouldReduceMotion = useReducedMotion();
+  const [isMobile, setIsMobile] = useState(false);
 
-  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
-  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
+  useEffect(() => {
+    setIsMobile(window.innerWidth < 768);
+  }, []);
+
+  const particleCount = isMobile ? 8 : 20;
 
   return (
-    <main className="overflow-hidden" ref={containerRef}>
-      {/* HERO SECTION WITH PARALLAX */}
+    <main className="overflow-hidden transform-gpu">
+      {/* HERO SECTION */}
       <section className="relative min-h-screen pt-30 pb-40 flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-blue-950 overflow-hidden">
-        {/* Animated 3D Background Elements */}
+
+        {/* Background Layer */}
         <div className="absolute inset-0 overflow-hidden">
-          {/* Floating 3D Shapes */}
+
+          {/* Floating Shape 1 */}
           <motion.div
-            animate={{
-              x: [0, 100, 0],
-              y: [0, -50, 0],
-              rotate: [0, 180, 360]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 20,
-              ease: "linear"
-            }}
-            className="absolute top-1/4 left-1/4 w-64 h-64"
+            animate={
+              shouldReduceMotion
+                ? {}
+                : { x: [0, 100, 0], y: [0, -50, 0], rotate: [0, 360] }
+            }
+            transition={{ repeat: Infinity, duration: 25, ease: "linear" }}
+            className="absolute top-1/4 left-1/4 w-64 h-64 will-change-transform"
           >
-            <div className="w-full h-full bg-gradient-to-br from-blue-500/20 to-cyan-400/10 rounded-full blur-2xl"></div>
+            <div className="w-full h-full bg-gradient-to-br from-blue-500/20 to-cyan-400/10 rounded-full blur-xl"></div>
           </motion.div>
 
+          {/* Floating Shape 2 */}
           <motion.div
-            animate={{
-              x: [0, -80, 0],
-              y: [0, 60, 0],
-              rotate: [360, 180, 0]
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 25,
-              ease: "linear"
-            }}
-            className="absolute bottom-1/4 right-1/4 w-80 h-80"
+            animate={
+              shouldReduceMotion
+                ? {}
+                : { x: [0, -80, 0], y: [0, 60, 0], rotate: [360, 0] }
+            }
+            transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+            className="absolute bottom-1/4 right-1/4 w-80 h-80 will-change-transform"
           >
-            <div className="w-full h-full bg-gradient-to-tr from-purple-500/15 to-pink-500/10 rounded-full blur-2xl"></div>
+            <div className="w-full h-full bg-gradient-to-tr from-purple-500/15 to-pink-500/10 rounded-full blur-xl"></div>
           </motion.div>
 
           {/* Pulsing Rings */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <motion.div
-              animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.1, 0.3] }}
-              transition={{ repeat: Infinity, duration: 4 }}
-              className="absolute w-[800px] h-[800px] border border-blue-500/20 rounded-full"
-            />
-            <motion.div
-              animate={{ scale: [1, 1.4, 1], opacity: [0.2, 0.05, 0.2] }}
-              transition={{ repeat: Infinity, duration: 5, delay: 0.5 }}
-              className="absolute w-[1000px] h-[1000px] border border-cyan-400/15 rounded-full"
-            />
-          </div>
-
-          {/* Grid with Perspective */}
-          <div className="absolute inset-0 opacity-10 transform-gpu">
-            <div
-              className="h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:4rem_4rem]"
-              style={{
-                transform: 'perspective(500px) rotateX(60deg)',
-                transformOrigin: 'center'
-              }}
-            />
-          </div>
-
-          {/* Animated Code Particles */}
-          <div className="absolute inset-0">
-            {[...Array(20)].map((_, i) => (
+          {!shouldReduceMotion && (
+            <div className="absolute inset-0 flex items-center justify-center">
               <motion.div
-                key={i}
-                animate={{
-                  y: [0, -1000],
-                  x: Math.sin(i) * 100,
-                  opacity: [0, 1, 0]
-                }}
-                transition={{
-                  repeat: Infinity,
-                  duration: 3 + Math.random() * 2,
-                  delay: i * 0.1
-                }}
-                className="absolute text-blue-400/20 text-xl font-mono"
-                style={{
-                  left: `${Math.random() * 100}%`,
-                  top: `${Math.random() * 100}%`,
-                }}
-              >
-                {i % 2 === 0 ? '<>' : '</>'}
-              </motion.div>
-            ))}
-          </div>
+                animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.1, 0.3] }}
+                transition={{ repeat: Infinity, duration: 5 }}
+                className="absolute w-[700px] h-[700px] border border-blue-500/20 rounded-full"
+              />
+              <motion.div
+                animate={{ scale: [1, 1.4, 1], opacity: [0.2, 0.05, 0.2] }}
+                transition={{ repeat: Infinity, duration: 6 }}
+                className="absolute w-[900px] h-[900px] border border-cyan-400/15 rounded-full"
+              />
+            </div>
+          )}
+
+          {/* Code Particles */}
+          {!shouldReduceMotion && (
+            <div className="absolute inset-0">
+              {[...Array(particleCount)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  animate={{ y: [0, -800], opacity: [0, 1, 0] }}
+                  transition={{
+                    repeat: Infinity,
+                    duration: 4 + i,
+                    delay: i * 0.2,
+                    ease: "linear",
+                  }}
+                  className="absolute text-blue-400/20 text-xl font-mono will-change-transform"
+                  style={{
+                    left: `${Math.random() * 100}%`,
+                    top: `${Math.random() * 100}%`,
+                  }}
+                >
+                  {i % 2 === 0 ? "<>" : "</>"}
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
 
-        {/* Main Content with 3D Effect */}
-        <div className="relative z-10 px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
-            className="text-center max-w-6xl"
-          >
-            {/* Company Name with 3D Text Effect */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-              className="mb-12"
-            >
-              <div className="relative inline-block">
-                {/* 3D Shadow Effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 blur-2xl opacity-50"></div>
-                <div className="relative">
-                  <h1 className="text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter">
-                    <span className="bg-gradient-to-r from-white via-blue-100 to-cyan-200 bg-clip-text text-transparent">
-                      INDCODE
-                    </span>
-                  </h1>
-                  <motion.div
-                    animate={{
-                      textShadow: [
-                        "0 0 20px rgba(59, 130, 246, 0.5)",
-                        "0 0 40px rgba(59, 130, 246, 0.8)",
-                        "0 0 20px rgba(59, 130, 246, 0.5)"
-                      ]
-                    }}
-                    transition={{ repeat: Infinity, duration: 2 }}
-                    className="text-2xl sm:text-3xl md:text-4xl font-bold mt-4 text-cyan-300"
-                  >
-                    TECHNOLOGIES
-                  </motion.div>
-                </div>
-              </div>
-            </motion.div>
+        {/* Main Content */}
+        <div className="relative z-10 px-6 text-center max-w-6xl">
+          <h1 className="text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter">
+            <span className="bg-gradient-to-r from-white via-blue-100 to-cyan-200 bg-clip-text text-transparent drop-shadow-[0_0_25px_rgba(59,130,246,0.6)]">
+              INDCODE
+            </span>
+          </h1>
 
-            {/* Animated Description */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1 }}
-              className="max-w-3xl mx-auto mb-16"
-            >
-              <p className="text-xl md:text-2xl text-gray-300 leading-relaxed">
-                We craft{" "}
-                <motion.span
-                  animate={{ color: ['#60a5fa', '#22d3ee', '#60a5fa'] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                  className="font-bold"
-                >
-                  cutting-edge digital solutions
-                </motion.span>{" "}
-                that transform businesses and create{" "}
-                <motion.span
-                  animate={{ color: ['#22d3ee', '#60a5fa', '#22d3ee'] }}
-                  transition={{ repeat: Infinity, duration: 2, delay: 0.5 }}
-                  className="font-bold"
-                >
-                  lasting impact
-                </motion.span>
-              </p>
-            </motion.div>
+          <div className="text-2xl sm:text-3xl md:text-4xl font-bold mt-4 text-cyan-300">
+            TECHNOLOGIES
+          </div>
 
-            {/* Interactive CTA Buttons with 3D Effect - WITH LINKS */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2 }}
-              className="flex flex-col sm:flex-row gap-6 justify-center"
-            >
-              {/* Primary Button with 3D Effect - LINK ADDED */}
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative px-10 py-5 rounded-2xl overflow-hidden cursor-pointer"
-                onClick={() => window.location.href = "/contact"} // LINK ADDED HERE
-              >
-                {/* 3D Button Base */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500"></div>
-                {/* 3D Top Layer */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-400 translate-y-1 group-hover:translate-y-0 transition-transform"></div>
-                {/* Shine Effect */}
-                <motion.div
-                  animate={{ x: ['-100%', '200%'] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                />
-                <div className="relative z-10 flex items-center justify-center gap-3">
-                  <span className="text-white font-bold text-lg">Start Your Journey</span>
-                  <motion.div
-                    animate={{ x: [0, 5, 0] }}
-                    transition={{ repeat: Infinity, duration: 3 }}
-                    className="group-hover:rotate-45 transition-transform duration-300" // FIXED HERE
-                  >
-                    <ArrowUpRight className="w-6 h-6 text-white" />
-                  </motion.div>
-                </div>
-              </motion.button>
+          <p className="text-xl md:text-2xl text-gray-300 leading-relaxed mt-8 max-w-3xl mx-auto">
+            We craft <span className="text-blue-400 font-bold">cutting-edge digital solutions</span> that transform businesses and create <span className="text-cyan-400 font-bold">lasting impact</span>
+          </p>
 
-              {/* Secondary Button - LINK ADDED */}
-              <motion.button
-                whileHover={{ scale: 1.05, y: -5 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative px-10 py-5 rounded-2xl border-2 border-blue-500/50 bg-transparent backdrop-blur-sm hover:bg-blue-500/10 transition-all duration-300 cursor-pointer"
-                onClick={() => window.location.href = "/projects"} // LINK ADDED HERE
-              >
-                <span className="text-white font-bold text-lg">Explore Our Work</span>
-                <div className="absolute -bottom-1 left-1/4 w-1/2 h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-              </motion.button>
-            </motion.div>
-          </motion.div>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mt-12">
+            <Link href="/contact">
+              <button className="group px-10 py-5 bg-gradient-to-r from-blue-600 to-cyan-500 rounded-2xl font-bold text-lg flex items-center gap-3 hover:scale-105 active:scale-95 transition-all shadow-2xl shadow-blue-500/25">
+                Start Your Journey
+                <ArrowUpRight className="w-6 h-6 group-hover:rotate-45 transition-transform" />
+              </button>
+            </Link>
+
+            <Link href="/projects">
+              <button className="px-10 py-5 rounded-2xl border-2 border-blue-500/50 text-white font-bold text-lg hover:bg-blue-500/10 transition-all">
+                Explore Our Work
+              </button>
+            </Link>
+          </div>
         </div>
 
         {/* Advanced Scroll Indicator */}
@@ -407,65 +306,65 @@ export default function Home() {
             </motion.h2>
           </div>
 
-          <a href= "/services">
-          <div className="grid lg:grid-cols-3 gap-8 cursor-pointer">
-            {[
-              {
-                icon: Code2,
-                title: "Web Development",
-                desc: "High-performance web applications using React, Next.js, and modern cloud architecture.",
-                features: ["SSR/SSG", "Microservices", "Real-time Features"],
-                gradient: "from-blue-500 to-cyan-500"
-              },
-              {
-                icon: Smartphone,
-                title: "App Development",
-                desc: "Native & cross-platform mobile apps with Flutter & React Native for seamless experiences.",
-                features: ["iOS & Android", "Offline Support", "App Store Deployment"],
-                gradient: "from-purple-500 to-pink-500"
-              },
-              {
-                icon: Cloud,
-                title: "SaaS & Automation",
-                desc: "Custom SaaS platforms and intelligent workflow automation systems. Built for scale and security.",
-                features: ["Multi-tenant", "API Integration", "Auto-scaling"],
-                gradient: "from-green-500 to-emerald-500"
-              }
-            ].map((service, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.2 }}
-                whileHover={{ y: -10, transition: { duration: 0.2 } }}
-                className="group relative bg-gray-800 rounded-2xl p-8 hover:bg-gray-800/50 backdrop-blur-sm border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
-              >
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.gradient} rounded-full filter blur-3xl opacity-10 group-hover:opacity-20 transition-opacity`}></div>
+          <a href="/services">
+            <div className="grid lg:grid-cols-3 gap-8 cursor-pointer">
+              {[
+                {
+                  icon: Code2,
+                  title: "Web Development",
+                  desc: "High-performance web applications using React, Next.js, and modern cloud architecture.",
+                  features: ["SSR/SSG", "Microservices", "Real-time Features"],
+                  gradient: "from-blue-500 to-cyan-500"
+                },
+                {
+                  icon: Smartphone,
+                  title: "App Development",
+                  desc: "Native & cross-platform mobile apps with Flutter & React Native for seamless experiences.",
+                  features: ["iOS & Android", "Offline Support", "App Store Deployment"],
+                  gradient: "from-purple-500 to-pink-500"
+                },
+                {
+                  icon: Cloud,
+                  title: "SaaS & Automation",
+                  desc: "Custom SaaS platforms and intelligent workflow automation systems. Built for scale and security.",
+                  features: ["Multi-tenant", "API Integration", "Auto-scaling"],
+                  gradient: "from-green-500 to-emerald-500"
+                }
+              ].map((service, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.2 }}
+                  whileHover={{ y: -10, transition: { duration: 0.2 } }}
+                  className="group relative bg-gray-800 rounded-2xl p-8 hover:bg-gray-800/50 backdrop-blur-sm border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
+                >
+                  <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.gradient} rounded-full filter blur-3xl opacity-10 group-hover:opacity-20 transition-opacity`}></div>
 
-                <div className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${service.gradient} mb-6`}>
-                  <service.icon className="w-8 h-8 text-white" />
-                </div>
+                  <div className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${service.gradient} mb-6`}>
+                    <service.icon className="w-8 h-8 text-white" />
+                  </div>
 
-                <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
-                <p className="text-gray-400 mb-6">{service.desc}</p>
+                  <h3 className="text-2xl font-bold text-white mb-4">{service.title}</h3>
+                  <p className="text-gray-400 mb-6">{service.desc}</p>
 
-                <div className="space-y-3">
-                  {service.features.map((feature, j) => (
-                    <div key={j} className="flex items-center gap-3">
-                      <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                      <span className="text-sm text-gray-300">{feature}</span>
-                    </div>
-                  ))}
-                </div>
+                  <div className="space-y-3">
+                    {service.features.map((feature, j) => (
+                      <div key={j} className="flex items-center gap-3">
+                        <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
+                        <span className="text-sm text-gray-300">{feature}</span>
+                      </div>
+                    ))}
+                  </div>
 
                   <button className="mt-8 text-blue-400 font-semibold flex items-center gap-2 group-hover:gap-4 transition-all cursor-pointer">
                     Learn More
                     <ArrowUpRight className="w-4 h-4" />
                   </button>
-              </motion.div>
-            ))}
-          </div>
+                </motion.div>
+              ))}
+            </div>
           </a>
         </div>
       </section>
