@@ -79,7 +79,7 @@ export default function AboutPage() {
               <span className="text-blue-400 text-sm font-medium">FRESH START, BIG DREAMS</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-300 mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-clip-text text-transparent bg-linear-to-r from-white via-blue-100 to-blue-300 mb-6">
               Building Tomorrow's
               <span className="block mt-4">Digital Landscape <span className="text-blue-400">Today</span></span>
             </h1>
@@ -164,7 +164,7 @@ export default function AboutPage() {
               transition={{ duration: 0.8 }}
               className="bg-gray-800 rounded-2xl p-8 border border-gray-700"
             >
-              <div className="inline-flex p-4 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 mb-6">
+              <div className="inline-flex p-4 rounded-xl bg-linear-to-br from-blue-500 to-blue-700 mb-6">
                 <Target className="w-8 h-8 text-white" />
               </div>
               <h3 className="text-2xl font-bold text-white mb-4">Our Promise</h3>
@@ -214,7 +214,7 @@ export default function AboutPage() {
                 transition={{ delay: index * 0.1 }}
                 className="group bg-gray-900 rounded-2xl p-8 border border-gray-800 hover:border-blue-500/50 transition-all duration-500 hover:-translate-y-2"
               >
-                <div className="inline-flex p-4 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 mb-6">
+                <div className="inline-flex p-4 rounded-xl bg-linear-to-br from-blue-500 to-blue-700 mb-6">
                   <value.icon className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-bold text-white mb-4">{value.title}</h3>
@@ -261,7 +261,7 @@ export default function AboutPage() {
                 transition={{ delay: index * 0.1 }}
                 className="group bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-500 hover:-translate-y-2 text-center"
               >
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-xl font-bold mb-6 mx-auto">
+                <div className="w-16 h-16 rounded-full bg-linear-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-xl font-bold mb-6 mx-auto">
                   {member.name.split(' ').map(n => n[0]).join('')}
                 </div>
 
@@ -307,7 +307,7 @@ export default function AboutPage() {
                   transition={{ delay: index * 0.1 }}
                   className="flex items-start gap-4 p-6 bg-gray-900 rounded-xl border border-gray-800"
                 >
-                  <div className="flex-shrink-0">
+                  <div className="shrink-0">
                     <div className="w-10 h-10 rounded-full bg-blue-500/20 flex items-center justify-center">
                       <span className="text-blue-400 font-bold">{index + 1}</span>
                     </div>
@@ -323,7 +323,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA - For New Company */}
-      <section className="py-24 px-6 bg-gradient-to-br from-gray-900 to-black text-center">
+      <section className="py-24 px-6 bg-linear-to-br from-gray-900 to-black text-center">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -348,7 +348,7 @@ export default function AboutPage() {
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a href="/contact" className="inline-block">
-                <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 cursor-pointer">
+                <button className="px-10 py-4 bg-linear-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 cursor-pointer">
                   Start Your First Project
                 </button>
               </a>
@@ -366,7 +366,7 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="mt-16 p-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/20"
+              className="mt-16 p-6 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/20"
             >
               <div className="flex items-center justify-center gap-3 mb-4">
                 <Zap className="w-5 h-5 text-blue-400" />

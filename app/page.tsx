@@ -32,7 +32,7 @@ export default function Home() {
   return (
     <main className="overflow-hidden" ref={containerRef}>
       {/* HERO SECTION WITH PARALLAX */}
-      <section className="relative min-h-screen pt-30 pb-40 flex items-center justify-center bg-gradient-to-br from-black via-gray-900 to-blue-950 overflow-hidden">
+      <section className="relative min-h-screen pt-30 pb-40 flex items-center justify-center bg-linear-to-br from-black via-gray-900 to-blue-950 overflow-hidden">
         {/* Animated 3D Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           {/* Floating 3D Shapes */}
@@ -49,7 +49,7 @@ export default function Home() {
             }}
             className="absolute top-1/4 left-1/4 w-64 h-64"
           >
-            <div className="w-full h-full bg-gradient-to-br from-blue-500/20 to-cyan-400/10 rounded-full blur-2xl"></div>
+            <div className="w-full h-full bg-linear-to-br from-blue-500/20 to-cyan-400/10 rounded-full blur-2xl"></div>
           </motion.div>
 
           <motion.div
@@ -65,7 +65,7 @@ export default function Home() {
             }}
             className="absolute bottom-1/4 right-1/4 w-80 h-80"
           >
-            <div className="w-full h-full bg-gradient-to-tr from-purple-500/15 to-pink-500/10 rounded-full blur-2xl"></div>
+            <div className="w-full h-full bg-linear-to-tr from-purple-500/15 to-pink-500/10 rounded-full blur-2xl"></div>
           </motion.div>
 
           {/* Pulsing Rings */}
@@ -73,19 +73,19 @@ export default function Home() {
             <motion.div
               animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.1, 0.3] }}
               transition={{ repeat: Infinity, duration: 4 }}
-              className="absolute w-[800px] h-[800px] border border-blue-500/20 rounded-full"
+              className="absolute w-200 h-200 border border-blue-500/20 rounded-full"
             />
             <motion.div
               animate={{ scale: [1, 1.4, 1], opacity: [0.2, 0.05, 0.2] }}
               transition={{ repeat: Infinity, duration: 5, delay: 0.5 }}
-              className="absolute w-[1000px] h-[1000px] border border-cyan-400/15 rounded-full"
+              className="absolute w-250 h-250 border border-cyan-400/15 rounded-full"
             />
           </div>
 
           {/* Grid with Perspective */}
           <div className="absolute inset-0 opacity-10 transform-gpu">
             <div
-              className="h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:4rem_4rem]"
+              className="h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-size-[4rem_4rem]"
               style={{
                 transform: 'perspective(500px) rotateX(60deg)',
                 transformOrigin: 'center'
@@ -137,10 +137,10 @@ export default function Home() {
             >
               <div className="relative inline-block">
                 {/* 3D Shadow Effect */}
-                <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 via-cyan-500 to-blue-600 blur-2xl opacity-50"></div>
+                <div className="absolute -inset-1 bg-linear-to-r from-blue-600 via-cyan-500 to-blue-600 blur-2xl opacity-50"></div>
                 <div className="relative">
                   <h1 className="text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter">
-                    <span className="bg-gradient-to-r from-white via-blue-100 to-cyan-200 bg-clip-text text-transparent">
+                    <span className="bg-linear-to-r from-white via-blue-100 to-cyan-200 bg-clip-text text-transparent">
                       INDCODE
                     </span>
                   </h1>
@@ -203,14 +203,14 @@ export default function Home() {
                 onClick={() => window.location.href = "/contact"} // LINK ADDED HERE
               >
                 {/* 3D Button Base */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-blue-600 via-blue-500 to-cyan-500"></div>
                 {/* 3D Top Layer */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-400 translate-y-1 group-hover:translate-y-0 transition-transform"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-blue-500 to-cyan-400 translate-y-1 group-hover:translate-y-0 transition-transform"></div>
                 {/* Shine Effect */}
                 <motion.div
                   animate={{ x: ['-100%', '200%'] }}
                   transition={{ repeat: Infinity, duration: 2 }}
-                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                  className="absolute inset-0 bg-linear-to-r from-transparent via-white/20 to-transparent"
                 />
                 <div className="relative z-10 flex items-center justify-center gap-3">
                   <span className="text-white font-bold text-lg">Start Your Journey</span>
@@ -232,7 +232,7 @@ export default function Home() {
                 onClick={() => window.location.href = "/projects"} // LINK ADDED HERE
               >
                 <span className="text-white font-bold text-lg">Explore Our Work</span>
-                <div className="absolute -bottom-1 left-1/4 w-1/2 h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                <div className="absolute -bottom-1 left-1/4 w-1/2 h-1 bg-linear-to-r from-transparent via-blue-400 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
               </motion.button>
             </motion.div>
           </motion.div>
@@ -260,7 +260,7 @@ export default function Home() {
                 <motion.div
                   animate={{ y: [0, 12, 0] }}
                   transition={{ repeat: Infinity, duration: 1.5 }}
-                  className="w-1.5 h-3 bg-gradient-to-b from-blue-400 to-cyan-300 rounded-full"
+                  className="w-1.5 h-3 bg-linear-to-b from-blue-400 to-cyan-300 rounded-full"
                 />
               </div>
             </div>
@@ -296,9 +296,9 @@ export default function Home() {
       </section>
 
       {/* ABOUT SECTION - ENHANCED */}
-      <section className="relative py-20 md:py-25 bg-gradient-to-b from-white to-gray-50 overflow-hidden">
-        {/* Simple gradient line */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500"></div>
+      <section className="relative py-20 md:py-25 bg-linear-to-b from-white to-gray-50 overflow-hidden">
+        {/* Simple linear line */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-blue-500 via-purple-500 to-blue-500"></div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -340,17 +340,17 @@ export default function Home() {
             </div>
 
             {/* Right Content - Interactive Card */}
-            <div className="relative h-[400px] md:h-[500px]">
+            <div className="relative h-100 md:h-125">
               {/* Simple shadow layer */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-500/90 to-purple-600/50 rounded-3xl rotate-3"></div>
+              <div className="absolute inset-0 bg-linear-to-br from-blue-500/90 to-purple-600/50 rounded-3xl rotate-3"></div>
 
               {/* Main Card with hover effect */}
               <a
                 href="/projects"
-                className="group absolute inset-0 bg-gradient-to-tr from-gray-900 to-gray-800 rounded-3xl -rotate-3 shadow-2xl p-6 md:p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-3xl"
+                className="group absolute inset-0 bg-linear-to-tr from-gray-900 to-gray-800 rounded-3xl -rotate-3 shadow-2xl p-6 md:p-8 flex flex-col justify-between overflow-hidden transition-all duration-300 hover:-translate-y-2 hover:shadow-3xl"
               >
                 {/* Shine effect on hover */}
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
+                <div className="absolute inset-0 bg-linear-to-r from-transparent via-white/5 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
 
                 <div>
                   <div className="inline-flex items-center gap-2 bg-blue-500/20 px-4 py-2 rounded-full mb-4">
@@ -441,9 +441,9 @@ export default function Home() {
                 whileHover={{ y: -10, transition: { duration: 0.2 } }}
                 className="group relative bg-gray-800 rounded-2xl p-8 hover:bg-gray-800/50 backdrop-blur-sm border border-gray-700 hover:border-blue-500/50 transition-all duration-300"
               >
-                <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${service.gradient} rounded-full filter blur-3xl opacity-10 group-hover:opacity-20 transition-opacity`}></div>
+                <div className={`absolute top-0 right-0 w-32 h-32 bg-linear-to-br ${service.gradient} rounded-full filter blur-3xl opacity-10 group-hover:opacity-20 transition-opacity`}></div>
 
-                <div className={`inline-flex p-4 rounded-xl bg-gradient-to-br ${service.gradient} mb-6`}>
+                <div className={`inline-flex p-4 rounded-xl bg-linear-to-br ${service.gradient} mb-6`}>
                   <service.icon className="w-8 h-8 text-white" />
                 </div>
 
@@ -475,7 +475,7 @@ export default function Home() {
         {/* Animated background */}
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.1),transparent_50%)]"></div>
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e5_1px,transparent_1px),linear-gradient(to_bottom,#4f46e5_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-5"></div>
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f46e5_1px,transparent_1px),linear-gradient(to_bottom,#4f46e5_1px,transparent_1px)] bg-size-[4rem_4rem] opacity-5"></div>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-6">
@@ -500,7 +500,7 @@ export default function Home() {
 
           <div className="relative">
             {/* Connection line */}
-            <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 hidden lg:block"></div>
+            <div className="absolute left-0 right-0 top-1/2 h-0.5 bg-linear-to-r from-blue-500 via-purple-500 to-blue-500 hidden lg:block"></div>
 
             <div className="grid lg:grid-cols-4 gap-8 lg:gap-4">
               {[
@@ -555,7 +555,7 @@ export default function Home() {
       </section>
 
       {/* CTA - ENHANCED */}
-      <section className="relative py-22 bg-gradient-to-br from-gray-900 to-black overflow-hidden">
+      <section className="relative py-22 bg-linear-to-br from-gray-900 to-black overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl"></div>
@@ -584,7 +584,7 @@ export default function Home() {
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <Link href="/contact">
-                <button className="group px-8 sm:px-10 py-4 sm:py-5 bg-gradient-to-r from-blue-600 to-blue-700 rounded-xl font-bold text-lg hover:from-blue-500 hover:to-blue-600 transition-all duration-300 flex items-center justify-center gap-3 hover:gap-5 hover:scale-105 active:scale-95 shadow-2xl shadow-blue-500/25 cursor-pointer w-full sm:w-auto">
+                <button className="group px-8 sm:px-10 py-4 sm:py-5 bg-linear-to-r from-blue-600 to-blue-700 rounded-xl font-bold text-lg hover:from-blue-500 hover:to-blue-600 transition-all duration-300 flex items-center justify-center gap-3 hover:gap-5 hover:scale-105 active:scale-95 shadow-2xl shadow-blue-500/25 cursor-pointer w-full sm:w-auto">
                   Start Your Journey
                   <ArrowUpRight className="w-5 h-5 group-hover:rotate-45 transition-transform" />
                 </button>
