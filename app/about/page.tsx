@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import Image from "next/image";
 import {
   Target,
   Users,
@@ -43,13 +44,31 @@ export default function AboutPage() {
   const foundingStory = [
     "Indcode Technologies was born from a simple yet powerful vision: to make premium digital solutions accessible to ambitious businesses.",
     "As a fresh startup, we bring energy, innovation, and a client-first approach that sets us apart.",
-    "Our small but highly skilled team is passionate about transforming ideas into reality with cutting-edge technology."
+    "Our small but highly skilled team, led by Mr. Rajani kant, is passionate about transforming ideas into reality with cutting-edge technology."
   ];
 
   const team = [
-    { name: "Founder", role: "Vision & Strategy", expertise: "Tech Entrepreneurship, Product Development" },
-    { name: "Lead Developer", role: "Technical Excellence", expertise: "Full-Stack Development, Cloud Architecture" },
-    { name: "UX Designer", role: "User Experience", expertise: "UI/UX Design, Product Strategy" }
+    { 
+      name: "Mr. Rajani kant", 
+      alt_image: "MR",
+      role: "Founder & CEO", 
+      expertise: "Tech Entrepreneurship, Product Development, Vision & Strategy",
+      image: "/rajanikant_profile.jpeg"
+    },
+    { 
+      name: "Mr. Rajani kant", 
+      alt_image: "MR",
+      role: "Lead Developer", 
+      expertise: "Full-Stack Development, Cloud Architecture, Technical Excellence",
+      image: "/rajanikant_profile.jpeg"
+    },
+    { 
+      name: "Mr. Rajani kant", 
+      alt_image: "MR",
+      role: "UX Designer", 
+      expertise: "UI/UX Design, Product Strategy, User Experience",
+      image: "/rajanikant_profile.jpeg"
+    }
   ];
 
   const upcomingGoals = [
@@ -225,7 +244,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team - Small but Mighty */}
+      {/* Team - Small but Mighty with Mr. Rajani kant in all roles */}
       <section className="py-24 px-6 bg-gray-900">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
@@ -246,8 +265,8 @@ export default function AboutPage() {
               Meet Our <span className="text-blue-400">Core Team</span>
             </motion.h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto mt-6">
-              A compact team of dedicated professionals who wear multiple hats
-              to deliver outstanding results for our clients.
+              A compact team of dedicated professionals led by Mr. Rajani kant,
+              who wears multiple hats to deliver outstanding results for our clients.
             </p>
           </div>
 
@@ -261,8 +280,14 @@ export default function AboutPage() {
                 transition={{ delay: index * 0.1 }}
                 className="group bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-500 hover:-translate-y-2 text-center"
               >
-                <div className="w-16 h-16 rounded-full bg-linear-to-br from-blue-500 to-blue-700 flex items-center justify-center text-white text-xl font-bold mb-6 mx-auto">
-                  {member.name.split(' ').map(n => n[0]).join('')}
+                <div className="relative w-24 h-24 rounded-full overflow-hidden bg-linear-to-br from-blue-500 to-blue-700 mx-auto mb-6 border-4 border-gray-700 group-hover:border-blue-500/50 transition-all duration-500">
+                  <Image
+                    src={member.image}
+                    alt={member.alt_image}
+                    fill
+                    className="object-cover"
+                    sizes="96px"
+                  />
                 </div>
 
                 <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
@@ -271,6 +296,22 @@ export default function AboutPage() {
               </motion.div>
             ))}
           </div>
+
+          {/* Note about multi-role leadership */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="mt-12 text-center p-6 bg-gray-800/50 rounded-2xl border border-gray-700 max-w-3xl mx-auto"
+          >
+            <Code2 className="w-8 h-8 text-blue-400 mx-auto mb-4" />
+            <p className="text-gray-300 text-lg">
+              <span className="font-bold text-white">Mr. Rajani kant</span> brings diverse expertise across 
+              development, design, and business strategy - ensuring cohesive vision and execution 
+              across all projects.
+            </p>
+          </motion.div>
         </div>
       </section>
 
