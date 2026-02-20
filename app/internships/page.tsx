@@ -83,7 +83,7 @@ const benefits = [
 
 export default function InternshipsPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-black text-white">
       {/* Navigation */}
       <nav className="container mx-auto px-6 py-6">
         <Link 
@@ -260,7 +260,7 @@ export default function InternshipsPage() {
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <Link href="/general_application">
-              <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 cursor-pointer">
+              <button className="px-10 py-4 bg-linear-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 cursor-pointer">
                 Apply for Internship
               </button>
             </Link>

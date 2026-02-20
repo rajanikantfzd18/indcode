@@ -3,7 +3,7 @@ import { ArrowLeft, Shield, Lock, Eye, UserCheck } from 'lucide-react';
 
 export default function PrivacyPolicyPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-black text-white">
       {/* Navigation */}
       <nav className="container mx-auto px-6 py-6">
         <Link 

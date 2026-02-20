@@ -59,7 +59,7 @@ export default function GeneralApplicationPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-black text-white">
       {/* Navigation */}
       <nav className="container mx-auto px-6 py-6">
         <Link 
@@ -247,7 +247,7 @@ export default function GeneralApplicationPage() {
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer shadow-xl shadow-blue-900/20"
+                    className="w-full py-4 bg-linear-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer shadow-xl shadow-blue-900/20"
                   >
                     {isSubmitting ? (
                       <>

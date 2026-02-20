@@ -162,7 +162,7 @@ export default function ScheduleCallPage() {
                     </p>
                     <Link
                       href="/"
-                      className="inline-block px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300"
+                      className="inline-block px-8 py-3 bg-linear-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300"
                     >
                       Return to Home
                     </Link>
@@ -360,7 +360,7 @@ export default function ScheduleCallPage() {
                       <button
                         type="submit"
                         disabled={isSubmitting || !selectedDate || !selectedTime}
-                        className="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        className="w-full py-4 bg-linear-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                       >
                         {isSubmitting ? (
                           <>
@@ -394,7 +394,7 @@ export default function ScheduleCallPage() {
                     "No-obligation follow-up"
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
                       <span className="text-gray-300">{item}</span>
                     </div>
                   ))}
@@ -439,7 +439,7 @@ export default function ScheduleCallPage() {
               </div>
 
               {/* Next Steps */}
-              <div className="bg-gradient-to-r from-blue-500/10 to-cyan-500/10 rounded-2xl p-8 border border-blue-500/20 mt-6">
+              <div className="bg-linear-to-r from-blue-500/10 to-cyan-500/10 rounded-2xl p-8 border border-blue-500/20 mt-6">
                 <h3 className="text-xl font-bold text-white mb-4">After Scheduling</h3>
                 <div className="space-y-3 text-sm text-gray-300">
                   <p>✓ You'll receive a confirmation email</p>

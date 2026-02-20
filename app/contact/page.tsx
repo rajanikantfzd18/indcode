@@ -128,7 +128,7 @@ export default function ContactPage() {
               <span className="text-blue-400 text-sm font-medium">LET'S CONNECT</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-300 mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-clip-text text-transparent bg-linear-to-r from-white via-blue-100 to-blue-300 mb-6">
               Start Your
               <span className="block mt-4">Digital <span className="text-blue-400">Journey</span></span>
             </h1>
@@ -160,7 +160,7 @@ export default function ContactPage() {
                     className="group bg-gray-900 rounded-2xl p-6 border border-gray-800 hover:border-blue-500/50 transition-all duration-300"
                   >
                     <div className="flex items-start gap-4">
-                      <div className={`p-3 rounded-xl bg-gradient-to-br ₹ {info.color}`}>
+                      <div className={`p-3 rounded-xl bg-linear-to-br ₹ {info.color}`}>
                         <info.icon className="w-6 h-6 text-white" />
                       </div>
                       <div>
@@ -181,7 +181,7 @@ export default function ContactPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="mt-12 p-6 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/20 hover:border-blue-500/50 transition-all duration-300"
+                className="mt-12 p-6 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/20 hover:border-blue-500/50 transition-all duration-300"
               >
                 <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                   <Shield className="w-5 h-5 text-blue-400" />
@@ -197,7 +197,7 @@ export default function ContactPage() {
                     "Post-launch support"
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-3">
-                      <CheckCircle className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                      <CheckCircle className="w-4 h-4 text-blue-400 shrink-0" />
                       <span className="text-gray-300 text-sm">{item}</span>
                     </div>
                   ))}
@@ -363,7 +363,7 @@ export default function ContactPage() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="group px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                        className="group px-8 py-3 bg-linear-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
                       >
                         {isSubmitting ? (
                           <>
@@ -468,7 +468,7 @@ export default function ContactPage() {
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
               {/* Schedule a Free Call button - Less width */}
               <a href="/schedule_call" className="w-full max-w-xs sm:w-auto">
-                <button className="w-full px-6 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer">
+                <button className="w-full px-6 py-4 bg-linear-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer">
                   Schedule a Free Call
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </button>

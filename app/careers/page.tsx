@@ -139,7 +139,7 @@ export default function CareersPage() {
               <span className="text-blue-400 text-sm font-medium">JOIN OUR TEAM</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-300 mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-clip-text text-transparent bg-linear-to-r from-white via-blue-100 to-blue-300 mb-6">
               Build Your
               <span className="block mt-4">Career With <span className="text-blue-400">Purpose</span></span>
             </h1>
@@ -165,7 +165,7 @@ export default function CareersPage() {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-8 py-4 cursor-pointer rounded-xl font-medium transition-all duration-300 flex items-center gap-3 ${activeTab === tab.id
-                    ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
+                    ? "bg-linear-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
                   }`}
               >
@@ -189,7 +189,7 @@ export default function CareersPage() {
                 >
                   {/* Featured Badge */}
                   {job.featured && (
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs font-semibold rounded-full mb-4">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-linear-to-r from-blue-600 to-blue-700 text-white text-xs font-semibold rounded-full mb-4">
                       <Zap className="w-3 h-3" />
                       Featured
                     </div>
@@ -242,7 +242,7 @@ export default function CareersPage() {
                     {/* Apply Button */}
                     <div>
                       <a href="/general_application" className="inline-block">
-                      <button className="px-8 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 flex items-center gap-2 group cursor-pointer">
+                      <button className="px-8 py-3 bg-linear-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 flex items-center gap-2 group cursor-pointer">
                         Apply Now
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </button>
@@ -276,7 +276,7 @@ export default function CareersPage() {
                     transition={{ delay: index * 0.1 }}
                     className="group bg-gray-800 rounded-2xl p-8 border border-gray-700 hover:border-blue-500/50 transition-all duration-500 hover:-translate-y-2 text-center"
                   >
-                    <div className="inline-flex p-4 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 mb-6">
+                    <div className="inline-flex p-4 rounded-xl bg-linear-to-br from-blue-500 to-blue-700 mb-6">
                       <benefit.icon className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-white mb-3">{benefit.title}</h3>
@@ -302,7 +302,7 @@ export default function CareersPage() {
               <div className="grid lg:grid-cols-2 gap-12">
                 <div>
                   <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700">
-                    <div className="inline-flex p-4 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 mb-6">
+                    <div className="inline-flex p-4 rounded-xl bg-linear-to-br from-blue-500 to-blue-700 mb-6">
                       <Target className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-6">Our Values</h3>
@@ -326,7 +326,7 @@ export default function CareersPage() {
                         }
                       ].map((value, i) => (
                         <div key={i} className="flex items-start gap-4">
-                          <div className="flex-shrink-0 w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
+                          <div className="shrink-0 w-2 h-2 bg-blue-500 rounded-full mt-2"></div>
                           <div>
                             <h4 className="font-bold text-white mb-1">{value.title}</h4>
                             <p className="text-gray-400 text-sm">{value.desc}</p>
@@ -339,7 +339,7 @@ export default function CareersPage() {
 
                 <div>
                   <div className="bg-gray-800 rounded-2xl p-8 border border-gray-700">
-                    <div className="inline-flex p-4 rounded-xl bg-gradient-to-br from-purple-500 to-pink-500 mb-6">
+                    <div className="inline-flex p-4 rounded-xl bg-linear-to-br from-purple-500 to-pink-500 mb-6">
                       <Users className="w-8 h-8 text-white" />
                     </div>
                     <h3 className="text-2xl font-bold text-white mb-6">Team Culture</h3>
@@ -379,7 +379,7 @@ export default function CareersPage() {
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <a href="/general_application" className="inline-block">
-                <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer">
+                <button className="px-10 py-4 bg-linear-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer">
                   Send General Application
                   <ExternalLink className="w-5 h-5" />
                 </button>

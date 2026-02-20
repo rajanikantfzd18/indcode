@@ -3,7 +3,7 @@ import { ArrowLeft, FileText, AlertCircle, CheckCircle, XCircle, Scale } from 'l
 
 export default function TermsOfServicePage() {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white">
+    <div className="min-h-screen bg-linear-to-b from-gray-900 to-black text-white">
       {/* Navigation */}
       <nav className="container mx-auto px-6 py-6">
         <Link 
@@ -59,21 +59,21 @@ export default function TermsOfServicePage() {
               <h2 className="text-2xl font-bold mb-4">2. User Responsibilities</h2>
               <div className="space-y-4">
                 <div className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 shrink-0" />
                   <div>
                     <h3 className="font-bold mb-1">Accurate Information</h3>
                     <p className="text-gray-300 text-sm">Provide accurate and complete information when using our services</p>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 shrink-0" />
                   <div>
                     <h3 className="font-bold mb-1">Compliance</h3>
                     <p className="text-gray-300 text-sm">Comply with all applicable laws and regulations</p>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-green-400 mr-3 mt-1 shrink-0" />
                   <div>
                     <h3 className="font-bold mb-1">Account Security</h3>
                     <p className="text-gray-300 text-sm">Maintain security of your account credentials</p>
@@ -87,28 +87,28 @@ export default function TermsOfServicePage() {
               <h2 className="text-2xl font-bold mb-4">3. Prohibited Activities</h2>
               <div className="space-y-4">
                 <div className="flex items-start">
-                  <XCircle className="w-5 h-5 text-red-400 mr-3 mt-1 flex-shrink-0" />
+                  <XCircle className="w-5 h-5 text-red-400 mr-3 mt-1 shrink-0" />
                   <div>
                     <h3 className="font-bold mb-1">Illegal Use</h3>
                     <p className="text-gray-300 text-sm">Using services for any unlawful purpose</p>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <XCircle className="w-5 h-5 text-red-400 mr-3 mt-1 flex-shrink-0" />
+                  <XCircle className="w-5 h-5 text-red-400 mr-3 mt-1 shrink-0" />
                   <div>
                     <h3 className="font-bold mb-1">Intellectual Property</h3>
                     <p className="text-gray-300 text-sm">Infringing on intellectual property rights</p>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <XCircle className="w-5 h-5 text-red-400 mr-3 mt-1 flex-shrink-0" />
+                  <XCircle className="w-5 h-5 text-red-400 mr-3 mt-1 shrink-0" />
                   <div>
                     <h3 className="font-bold mb-1">Security Breach</h3>
                     <p className="text-gray-300 text-sm">Attempting to breach security measures</p>
                   </div>
                 </div>
                 <div className="flex items-start">
-                  <XCircle className="w-5 h-5 text-red-400 mr-3 mt-1 flex-shrink-0" />
+                  <XCircle className="w-5 h-5 text-red-400 mr-3 mt-1 shrink-0" />
                   <div>
                     <h3 className="font-bold mb-1">Spam</h3>
                     <p className="text-gray-300 text-sm">Sending spam or malicious content</p>

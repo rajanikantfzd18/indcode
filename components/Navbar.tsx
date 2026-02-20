@@ -74,7 +74,7 @@ export default function Navbar() {
     <>
       <header
         className={`fixed top-0 w-full z-50 
-    transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+    transition-all duration-500 ease-in-out
     ${scrolled && !mobileMenuOpen
             ? "bg-black/95 backdrop-blur-xl py-3"
             : "bg-transparent backdrop-blur-0 py-5"
@@ -91,12 +91,12 @@ export default function Navbar() {
             >
               {/* Animated border effect */}
               <div className="relative">
-                <div className={`absolute -inset-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg blur opacity-0 group-hover:opacity-70 transition-opacity duration-500`}></div>
+                <div className={`absolute -inset-1 bg-linear-to-r from-blue-500 to-purple-600 rounded-lg blur opacity-0 group-hover:opacity-70 transition-opacity duration-500`}></div>
                 <div className="relative bg-gray-900 rounded-lg p-2">
                   <div className="flex items-center gap-2">
                     {/* Logo Icon */}
                     <div className="relative">
-                      <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
+                      <div className="w-8 h-8 bg-linear-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
                         <span className="font-bold text-white text-sm">IT</span>
                       </div>
                       {/* Pulsing dot */}
@@ -107,7 +107,7 @@ export default function Navbar() {
 
                     {/* Text with cursor */}
                     <div className="flex items-baseline">
-                      <span className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                      <span className="text-xl font-bold bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
                         {text}
                       </span>
                       <span className="cursor ml-0.5 text-blue-400">|</span>
@@ -147,7 +147,7 @@ export default function Navbar() {
                 </span>
 
                 {/* Animated underline */}
-                <div className={`absolute -bottom-1 left-0 h-0.5 bg-gradient-to-r from-blue-500 to-cyan-400 transition-all duration-300 ${hoveredLink === link.href ? 'w-full' : 'w-0 group-hover:w-full'
+                <div className={`absolute -bottom-1 left-0 h-0.5 bg-linear-to-r from-blue-500 to-cyan-400 transition-all duration-300 ${hoveredLink === link.href ? 'w-full' : 'w-0 group-hover:w-full'
                   }`}></div>
 
                 {/* Hover effect dot */}
@@ -159,14 +159,14 @@ export default function Navbar() {
             {/* CTA Button */}
             <Link
               href="/contact"
-              className="group relative overflow-hidden px-6 py-3 rounded-lg bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 active:scale-95"
+              className="group relative overflow-hidden px-6 py-3 rounded-lg bg-linear-to-r from-blue-600 to-blue-700 hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 active:scale-95"
             >
               <span className="relative z-10 text-white font-semibold text-sm flex items-center gap-2">
                 Get Started
                 <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </span>
               {/* Shine effect */}
-              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent"></div>
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-linear-to-r from-transparent via-white/20 to-transparent"></div>
             </Link>
           </div>
 
@@ -200,14 +200,14 @@ export default function Navbar() {
 
         {/* Menu Panel */}
         <div
-          className={`absolute top-0 right-0 h-full w-80 bg-gradient-to-b from-gray-900 to-black border-l border-gray-800 shadow-2xl transition-transform duration-500 ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          className={`absolute top-0 right-0 h-full w-80 bg-linear-to-b from-gray-900 to-black border-l border-gray-800 shadow-2xl transition-transform duration-500 ${mobileMenuOpen ? "translate-x-0" : "translate-x-full"
             }`}
         >
           <div className="p-8 h-full flex flex-col">
             {/* Mobile Logo */}
             <div className="mb-12">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
+                <div className="w-10 h-10 bg-linear-to-br from-blue-500 to-cyan-400 rounded-lg flex items-center justify-center">
                   <span className="font-bold text-white text-lg">IT</span>
                 </div>
                 <div>
@@ -240,7 +240,7 @@ export default function Navbar() {
               <Link
                 href="/contact"
                 onClick={() => setMobileMenuOpen(false)}
-                className="block w-full text-center py-4 rounded-xl bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all"
+                className="block w-full text-center py-4 rounded-xl bg-linear-to-r from-blue-600 to-blue-700 text-white font-semibold hover:shadow-lg hover:shadow-blue-500/25 transition-all"
               >
                 Start Your Project
               </Link>
@@ -258,7 +258,7 @@ export default function Navbar() {
       {/* Scroll Progress Bar */}
       <div className="fixed top-0 left-0 right-0 h-1 z-50">
         <div
-          className="h-full bg-gradient-to-r from-blue-500 via-cyan-400 to-blue-500 transition-all duration-300"
+          className="h-full bg-linear-to-r from-blue-500 via-cyan-400 to-blue-500 transition-all duration-300"
           style={{ width: `${scrollProgress}%` }}
         />
       </div>

@@ -168,7 +168,7 @@ export default function ServicesPage() {
               <span className="text-blue-400 text-sm font-medium">OUR SERVICES</span>
             </div>
 
-            <h1 className="text-6xl md:text-8xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-300 mb-6">
+            <h1 className="text-6xl md:text-8xl font-bold leading-tight bg-clip-text text-transparent bg-linear-to-r from-white via-blue-100 to-blue-300 mb-6">
               Building Digital
               <span className="block mt-4">Products for the <span className="text-blue-400">Future</span></span>
             </h1>
@@ -205,7 +205,7 @@ export default function ServicesPage() {
               key={category.id}
               onClick={() => setActiveTab(category.id)}
               className={`px-6 py-3 cursor-pointer rounded-full font-medium transition-all duration-300 ${activeTab === category.id
-                  ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
+                  ? "bg-linear-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
                   : "bg-gray-900 text-gray-300 hover:bg-gray-800 border border-gray-800"
                 }`}
             >
@@ -227,14 +227,14 @@ export default function ServicesPage() {
               {/* Popular Badge */}
               {service.popular && (
                 <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
-                  <div className="px-4 py-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm font-semibold rounded-full shadow-lg shadow-blue-500/25">
+                  <div className="px-4 py-1 bg-linear-to-r from-blue-600 to-blue-700 text-white text-sm font-semibold rounded-full shadow-lg shadow-blue-500/25">
                     Most Popular
                   </div>
                 </div>
               )}
 
               {/* Icon */}
-              <div className="inline-flex p-4 rounded-xl bg-gradient-to-br from-blue-500 to-blue-700 mb-6">
+              <div className="inline-flex p-4 rounded-xl bg-linear-to-br from-blue-500 to-blue-700 mb-6">
                 <service.icon className="w-8 h-8 text-white" />
               </div>
 
@@ -246,7 +246,7 @@ export default function ServicesPage() {
               <div className="space-y-3 mb-8">
                 {service.features.map((feature, i) => (
                   <div key={i} className="flex items-center gap-3">
-                    <CheckCircle className="w-4 h-4 text-blue-400 flex-shrink-0" />
+                    <CheckCircle className="w-4 h-4 text-blue-400 shrink-0" />
                     <span className="text-gray-300 text-sm">{feature}</span>
                   </div>
                 ))}
@@ -266,7 +266,7 @@ export default function ServicesPage() {
 
               {/* CTA Button */}
               <a href="/schedule_call">
-                <button className="w-full py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 flex items-center justify-center gap-2 group cursor-pointer">
+                <button className="w-full py-3 bg-linear-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/25 flex items-center justify-center gap-2 group cursor-pointer">
                   Get Started
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -296,7 +296,7 @@ export default function ServicesPage() {
               { icon: Rocket, title: "Deployment", desc: "Launch & ongoing support" },
             ].map((step, index) => (
               <div key={index} className="text-center">
-                <div className="inline-flex p-4 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 mb-6">
+                <div className="inline-flex p-4 rounded-2xl bg-linear-to-br from-blue-500 to-blue-700 mb-6">
                   <step.icon className="w-8 h-8 text-white" />
                 </div>
                 <div className="text-2xl font-bold text-white mb-2">{step.title}</div>
@@ -324,7 +324,7 @@ export default function ServicesPage() {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <a href="/schedule_call">
-                <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 cursor-pointer">
+                <button className="px-10 py-4 bg-linear-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 cursor-pointer">
                   Schedule a Free Consultation
                 </button>
               </a>

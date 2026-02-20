@@ -131,7 +131,7 @@ export default function ProjectsPage() {
               <span className="text-blue-400 text-sm font-medium">OUR PORTFOLIO</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-white via-blue-100 to-blue-300 mb-6">
+            <h1 className="text-5xl md:text-7xl font-bold leading-tight bg-clip-text text-transparent bg-linear-to-r from-white via-blue-100 to-blue-300 mb-6">
               Projects That
               <span className="block mt-4">Define <span className="text-blue-400">Excellence</span></span>
             </h1>
@@ -172,7 +172,7 @@ export default function ProjectsPage() {
                 key={filter.id}
                 onClick={() => setActiveFilter(filter.id)}
                 className={`px-6 py-3 cursor-pointer rounded-full font-medium transition-all duration-300 flex items-center gap-2 ${activeFilter === filter.id
-                    ? "bg-gradient-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
+                    ? "bg-linear-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
                   }`}
               >
@@ -196,7 +196,7 @@ export default function ProjectsPage() {
                 {/* Featured Badge */}
                 {project.featured && (
                   <div className="absolute top-4 left-4 z-10">
-                    <div className="px-3 py-1 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-xs font-semibold rounded-full shadow-lg">
+                    <div className="px-3 py-1 bg-linear-to-r from-blue-600 to-blue-700 text-white text-xs font-semibold rounded-full shadow-lg">
                       Featured
                     </div>
                   </div>
@@ -204,7 +204,7 @@ export default function ProjectsPage() {
 
                 {/* Project Image Placeholder */}
                 <div className="relative h-48 overflow-hidden">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${project.imageColor} opacity-20`}></div>
+                  <div className={`absolute inset-0 bg-linear-to-br ${project.imageColor} opacity-20`}></div>
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-4xl font-bold text-white/30">
                       {project.category === "web" && <Globe className="w-16 h-16" />}
@@ -347,7 +347,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-24 px-6 bg-gradient-to-br from-gray-900 to-black text-center">
+      <section className="py-24 px-6 bg-linear-to-br from-gray-900 to-black text-center">
         <div className="max-w-4xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
@@ -365,7 +365,7 @@ export default function ProjectsPage() {
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
               <a href="/contact" className="inline-block">
-                <button className="px-10 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer">
+                <button className="px-10 py-4 bg-linear-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer">
                   Start Your Project
                   <ArrowUpRight className="w-5 h-5" />
                 </button>
