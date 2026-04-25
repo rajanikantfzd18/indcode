@@ -28,72 +28,60 @@ export default function CareersPage() {
   const jobOpenings = [
     {
       id: 1,
-      title: "Senior Frontend Developer",
-      department: "Engineering",
-      type: "Full-time",
-      location: "Remote",
-      experience: "3+ years",
-      salary: "₹ 80,000 - ₹ 120,000",
-      description: "Build cutting-edge web applications using React, Next.js, and modern frontend technologies.",
-      requirements: ["Expert in React & TypeScript", "Experience with Next.js", "Knowledge of modern CSS", "API integration"],
-      featured: true
-    },
-    {
-      id: 2,
       title: "UX/UI Designer",
       department: "Design",
       type: "Full-time",
       location: "Hybrid",
       experience: "2+ years",
-      salary: "₹ 60,000 - ₹ 90,000",
+      salary: "₹15,000 - ₹20,000",
       description: "Create beautiful and intuitive user interfaces for web and mobile applications.",
       requirements: ["Proficient in Figma", "User research skills", "Prototyping", "Design systems"],
       featured: true
     },
     {
-      id: 3,
-      title: "DevOps Engineer",
+      id: 2,
+      title: "Frontend Developer",
       department: "Engineering",
       type: "Full-time",
       location: "Remote",
       experience: "3+ years",
-      salary: "₹ 85,000 - ₹ 130,000",
-      description: "Build and maintain our cloud infrastructure and CI/CD pipelines.",
-      requirements: ["AWS/Azure/GCP", "Docker & Kubernetes", "CI/CD tools", "Infrastructure as Code"],
-      featured: false
+      salary: "₹20,000 - ₹25,000",
+      description: "Build cutting-edge web applications using React, Next.js, and modern frontend technologies.",
+      requirements: ["Expert in React & TypeScript", "Experience with Next.js", "Knowledge of modern CSS", "API integration"],
+      featured: true
     },
     {
-      id: 4,
-      title: "Product Manager",
-      department: "Product",
-      type: "Full-time",
-      location: "On-site",
-      experience: "4+ years",
-      salary: "₹ 90,000 - ₹ 140,000",
-      description: "Lead product strategy and work closely with engineering and design teams.",
-      requirements: ["Product lifecycle management", "Agile methodologies", "Data analysis", "Roadmap planning"],
-      featured: false
-    },
-    {
-      id: 5,
+      id: 3,
       title: "Backend Developer",
       department: "Engineering",
       type: "Full-time",
       location: "Remote",
       experience: "2+ years",
-      salary: "₹ 70,000 - ₹ 110,000",
+      salary: "₹25,000 - ₹30,000",
       description: "Develop scalable backend services and APIs using Node.js and modern frameworks.",
       requirements: ["Node.js/Express", "Database design", "REST/GraphQL APIs", "Microservices"],
       featured: false
     },
     {
-      id: 6,
+      id: 4,
+      title: "DevOps Engineer",
+      department: "Engineering",
+      type: "Full-time",
+      location: "Remote",
+      experience: "3+ years",
+      salary: "₹30,000 - ₹35,000",
+      description: "Build and maintain our cloud infrastructure and CI/CD pipelines.",
+      requirements: ["AWS/Azure/GCP", "Docker & Kubernetes", "CI/CD tools", "Infrastructure as Code"],
+      featured: false
+    },
+    {
+      id: 5,
       title: "Marketing Specialist",
       department: "Marketing",
       type: "Full-time",
       location: "Hybrid",
       experience: "2+ years",
-      salary: "₹ 50,000 - ₹ 80,000",
+      salary: "₹15,000 - ₹20,000",
       description: "Drive our digital marketing strategy and brand awareness campaigns.",
       requirements: ["Content creation", "SEO/SEM", "Social media", "Analytics"],
       featured: false
@@ -144,7 +132,7 @@ export default function CareersPage() {
               <span className="block mt-4">Career With <span className="text-blue-400">Purpose</span></span>
             </h1>
 
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
+            <p className="text-xl text-gray-300 max-w-3xl -mb-4 mx-auto leading-relaxed">
               Join a passionate team that's shaping the future of technology.
               Work on challenging projects, grow your skills, and make a real impact.
             </p>
@@ -165,8 +153,8 @@ export default function CareersPage() {
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
                 className={`px-8 py-4 cursor-pointer rounded-xl font-medium transition-all duration-300 flex items-center gap-3 ${activeTab === tab.id
-                    ? "bg-linear-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
-                    : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
+                  ? "bg-linear-to-r from-blue-600 to-blue-700 text-white shadow-lg shadow-blue-500/25"
+                  : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
                   }`}
               >
                 <tab.icon className="w-5 h-5" />
@@ -221,7 +209,6 @@ export default function CareersPage() {
                           <span className="text-gray-300">{job.experience}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                          <DollarSign className="w-4 h-4 text-gray-500" />
                           <span className="text-gray-300">{job.salary}</span>
                         </div>
                       </div>
@@ -241,11 +228,11 @@ export default function CareersPage() {
 
                     {/* Apply Button */}
                     <div>
-                      <a href="/general_application" className="inline-block">
-                      <button className="px-8 py-3 bg-linear-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 flex items-center gap-2 group cursor-pointer">
-                        Apply Now
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                      </button>
+                      <a href={`/apply_now?job=${encodeURIComponent(job.title)}&department=${encodeURIComponent(job.department)}`} className="inline-block">
+                        <button className="px-8 py-3 bg-linear-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 flex items-center gap-2 group cursor-pointer">
+                          Apply Now
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </button>
                       </a>
                     </div>
                   </div>

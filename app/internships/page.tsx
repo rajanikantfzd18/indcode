@@ -197,7 +197,7 @@ export default function InternshipsPage() {
                 
                 {/* Apply Button */}
                 <Link 
-                  href="/general_application"
+                  href={`/apply_now?job=${encodeURIComponent(program.title)}&department=${encodeURIComponent(program.department)}&type=internship`}
                   className="block w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-center transition-colors cursor-pointer"
                 >
                   Apply Now
@@ -258,13 +258,6 @@ export default function InternshipsPage() {
           <p className="text-gray-300 mb-8 text-lg">
             Applications are accepted on a rolling basis. Early applications have higher chances.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link href="/general_application">
-              <button className="px-10 py-4 bg-linear-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 cursor-pointer">
-                Apply for Internship
-              </button>
-            </Link>
-          </div>
         </div>
       </section>
     </div>

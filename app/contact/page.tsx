@@ -133,7 +133,7 @@ export default function ContactPage() {
               <span className="block mt-4">Digital <span className="text-blue-400">Journey</span></span>
             </h1>
 
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto mb-12 leading-relaxed">
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto -mb-12 leading-relaxed">
               Have an idea? Let's transform it into reality. Share your vision with us,
               and we'll craft the perfect solution together.
             </p>
