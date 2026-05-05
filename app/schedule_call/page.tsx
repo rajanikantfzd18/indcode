@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { 
   Calendar,
@@ -10,12 +10,13 @@ import {
   Phone,
   CheckCircle,
   Sparkles,
-  ArrowLeft,
   Globe,
   Mail,
-  MapPin
+  MapPin,
+  AlertCircle
 } from "lucide-react";
 import Link from "next/link";
+import { supabase } from "@/lib/supabase";
 
 export default function ScheduleCallPage() {
   const [selectedDate, setSelectedDate] = useState("");
@@ -29,8 +30,11 @@ export default function ScheduleCallPage() {
     projectType: "",
     message: ""
   });
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [callDetails, setCallDetails] = useState<any>(null);
 
   const timeSlots = [
     "09:00 AM", "10:00 AM", "11:00 AM", 
@@ -55,36 +59,134 @@ export default function ScheduleCallPage() {
     "Other"
   ];
 
+  // Validation function
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    } else if (formData.name.length < 2) {
+      newErrors.name = "Name must be at least 2 characters";
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    } else if (!emailRegex.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    // Phone validation (optional but if provided, should be valid)
+    if (formData.phone && !/^[0-9+\-\s()]{10,15}$/.test(formData.phone)) {
+      newErrors.phone = "Please enter a valid phone number";
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    } else if (formData.message.length < 10) {
+      newErrors.message = "Message must be at least 10 characters";
+    }
+
+    // Date and Time validation
+    if (!selectedDate) {
+      newErrors.date = "Please select a date";
+    }
+    if (!selectedTime) {
+      newErrors.time = "Please select a time";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    if (!selectedDate || !selectedTime) {
-      alert("Please select a date and time for the call");
+    setSubmitError("");
+
+    // Validate form
+    if (!validateForm()) {
       return;
     }
 
     setIsSubmitting(true);
-    
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    
-    // Send email notification (simulated)
-    console.log("Call Scheduled:", {
-      ...formData,
-      date: selectedDate,
-      time: selectedTime,
-      type: callType
-    });
+
+    try {
+      // Insert data into Supabase
+      const { data, error } = await supabase
+        .from('scheduled_calls')
+        .insert([
+          {
+            name: formData.name.trim(),
+            email: formData.email.trim().toLowerCase(),
+            phone: formData.phone.trim() || null,
+            company: formData.company.trim() || null,
+            project_type: formData.projectType || null,
+            message: formData.message.trim(),
+            call_type: callType,
+            scheduled_date: selectedDate,
+            scheduled_time: selectedTime,
+            status: 'scheduled'
+          }
+        ])
+        .select();
+
+      if (error) {
+        throw error;
+      }
+
+      // Save call details for success message
+      const selectedDateObj = nextDays.find(d => d.value === selectedDate);
+      setCallDetails({
+        date: selectedDateObj?.label || selectedDate,
+        time: selectedTime,
+        type: callTypes.find(t => t.id === callType)?.label
+      });
+
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+
+      // Reset form after 15 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          projectType: "",
+          message: ""
+        });
+        setSelectedDate("");
+        setSelectedTime("");
+        setCallType("video");
+        setErrors({});
+        setCallDetails(null);
+      }, 15000);
+
+    } catch (error: any) {
+      console.error("Error scheduling call:", error);
+      setSubmitError(error.message || "Failed to schedule. Please try again.");
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
     });
+    
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: ""
+      });
+    }
   };
 
   // Generate next 7 days for calendar
@@ -141,34 +243,37 @@ export default function ScheduleCallPage() {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Left Column - Calendar & Time */}
             <div className="lg:col-span-2">
-              <div className="bg-gray-900 rounded-2xl p-8 border border-gray-800">
+              <div className="bg-gray-900 rounded-2xl p-8 border border-gray-800 min-h-[700px] flex items-center">
                 {isSubmitted ? (
-                  <div className="text-center py-12">
+                  <div className="w-full flex flex-col items-center justify-center py-12">
                     <div className="inline-flex p-4 rounded-full bg-green-500/20 mb-6">
                       <CheckCircle className="w-16 h-16 text-green-500" />
                     </div>
-                    <h3 className="text-3xl font-bold text-white mb-4">Call Scheduled Successfully!</h3>
-                    <div className="bg-gray-800 rounded-xl p-6 mb-6">
-                      <div className="text-lg font-semibold text-green-400 mb-2">Call Details:</div>
-                      <div className="space-y-2 text-gray-300">
-                        <div>Date: {selectedDate}</div>
-                        <div>Time: {selectedTime}</div>
-                        <div>Type: {callTypes.find(t => t.id === callType)?.label}</div>
+                    <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center">
+                      Call Scheduled Successfully!
+                    </h3>
+                    <div className="bg-gray-800 rounded-xl p-6 mb-6 max-w-md mx-auto w-full">
+                      <div className="text-lg font-semibold text-green-400 mb-2 text-center">Call Details:</div>
+                      <div className="space-y-2 text-gray-300 text-center">
+                        <div>📅 Date: {callDetails?.date}</div>
+                        <div>⏰ Time: {callDetails?.time} IST</div>
+                        <div>📞 Type: {callDetails?.type}</div>
                       </div>
                     </div>
-                    <p className="text-gray-400 mb-8">
+                    <p className="text-gray-400 text-center max-w-md mx-auto">
                       We've sent a confirmation to {formData.email}. 
                       You'll receive a calendar invite shortly.
                     </p>
-                    <Link
-                      href="/"
-                      className="inline-block px-8 py-3 bg-linear-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300"
-                    >
-                      Return to Home
-                    </Link>
                   </div>
                 ) : (
-                  <>
+                  <div className="w-full">
+                    {submitError && (
+                      <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center gap-3">
+                        <AlertCircle className="w-5 h-5 text-red-400" />
+                        <p className="text-red-400 text-sm">{submitError}</p>
+                      </div>
+                    )}
+
                     <h2 className="text-2xl font-bold text-white mb-8">Select Date & Time</h2>
 
                     {/* Call Type Selection */}
@@ -178,8 +283,9 @@ export default function ScheduleCallPage() {
                         {callTypes.map((type) => (
                           <button
                             key={type.id}
+                            type="button"
                             onClick={() => setCallType(type.id)}
-                            className={`p-4 rounded-xl border transition-all duration-300 text-left ${
+                            className={`p-4 rounded-xl border transition-all duration-300 text-left cursor-pointer ${
                               callType === type.id
                                 ? "border-blue-500 bg-blue-500/10"
                                 : "border-gray-700 hover:border-gray-600"
@@ -211,8 +317,14 @@ export default function ScheduleCallPage() {
                         {nextDays.map((day) => (
                           <button
                             key={day.value}
-                            onClick={() => setSelectedDate(day.value)}
-                            className={`p-4 rounded-xl border transition-all duration-300 ${
+                            type="button"
+                            onClick={() => {
+                              setSelectedDate(day.value);
+                              if (errors.date) {
+                                setErrors({ ...errors, date: "" });
+                              }
+                            }}
+                            className={`p-4 rounded-xl border transition-all duration-300 cursor-pointer ${
                               selectedDate === day.value
                                 ? "border-blue-500 bg-blue-500/10 text-blue-400"
                                 : "border-gray-700 hover:border-gray-600 text-gray-300"
@@ -223,6 +335,9 @@ export default function ScheduleCallPage() {
                           </button>
                         ))}
                       </div>
+                      {errors.date && (
+                        <p className="text-red-400 text-xs mt-2">{errors.date}</p>
+                      )}
                     </div>
 
                     {/* Time Selection */}
@@ -235,8 +350,14 @@ export default function ScheduleCallPage() {
                         {timeSlots.map((time) => (
                           <button
                             key={time}
-                            onClick={() => setSelectedTime(time)}
-                            className={`py-3 rounded-lg border transition-all duration-300 ${
+                            type="button"
+                            onClick={() => {
+                              setSelectedTime(time);
+                              if (errors.time) {
+                                setErrors({ ...errors, time: "" });
+                              }
+                            }}
+                            className={`py-3 rounded-lg border transition-all duration-300 cursor-pointer ${
                               selectedTime === time
                                 ? "border-blue-500 bg-blue-500/10 text-blue-400"
                                 : "border-gray-700 hover:border-gray-600 text-gray-300"
@@ -246,6 +367,9 @@ export default function ScheduleCallPage() {
                           </button>
                         ))}
                       </div>
+                      {errors.time && (
+                        <p className="text-red-400 text-xs mt-2">{errors.time}</p>
+                      )}
                     </div>
 
                     {/* Selected Time Display */}
@@ -260,11 +384,12 @@ export default function ScheduleCallPage() {
                             </div>
                           </div>
                           <button
+                            type="button"
                             onClick={() => {
                               setSelectedDate("");
                               setSelectedTime("");
                             }}
-                            className="text-sm text-gray-400 hover:text-white"
+                            className="text-sm text-gray-400 hover:text-white transition-colors cursor-pointer"
                           >
                             Clear
                           </button>
@@ -284,10 +409,12 @@ export default function ScheduleCallPage() {
                             name="name"
                             value={formData.name}
                             onChange={handleChange}
-                            required
-                            className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                            className={`w-full bg-gray-800 border ${errors.name ? 'border-red-500' : 'border-gray-700'} rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors cursor-text`}
                             placeholder="Your full name"
                           />
+                          {errors.name && (
+                            <p className="text-red-400 text-xs mt-1">{errors.name}</p>
+                          )}
                         </div>
                         
                         <div>
@@ -297,24 +424,29 @@ export default function ScheduleCallPage() {
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            required
-                            className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                            className={`w-full bg-gray-800 border ${errors.email ? 'border-red-500' : 'border-gray-700'} rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors cursor-text`}
                             placeholder="Your email address"
                           />
+                          {errors.email && (
+                            <p className="text-red-400 text-xs mt-1">{errors.email}</p>
+                          )}
                         </div>
                       </div>
 
                       <div className="grid md:grid-cols-2 gap-6 mb-6">
                         <div>
-                          <label className="block text-gray-400 text-sm mb-2">Phone Number *</label>
+                          <label className="block text-gray-400 text-sm mb-2">Phone Number</label>
                           <input
                             type="tel"
                             name="phone"
                             value={formData.phone}
                             onChange={handleChange}
-                            className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                            className={`w-full bg-gray-800 border ${errors.phone ? 'border-red-500' : 'border-gray-700'} rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors cursor-text`}
                             placeholder="Your phone number"
                           />
+                          {errors.phone && (
+                            <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
+                          )}
                         </div>
                         
                         <div>
@@ -324,7 +456,7 @@ export default function ScheduleCallPage() {
                             name="company"
                             value={formData.company}
                             onChange={handleChange}
-                            className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                            className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors cursor-text"
                             placeholder="NA if not applicable"
                           />
                         </div>
@@ -336,7 +468,7 @@ export default function ScheduleCallPage() {
                           name="projectType"
                           value={formData.projectType}
                           onChange={handleChange}
-                          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors cursor-pointer"
                         >
                           <option value="">Select project type</option>
                           {projectTypes.map((type) => (
@@ -352,15 +484,18 @@ export default function ScheduleCallPage() {
                           value={formData.message}
                           onChange={handleChange}
                           rows={3}
-                          className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                          className={`w-full bg-gray-800 border ${errors.message ? 'border-red-500' : 'border-gray-700'} rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors cursor-text`}
                           placeholder="Briefly describe what you'd like to discuss..."
                         />
+                        {errors.message && (
+                          <p className="text-red-400 text-xs mt-1">{errors.message}</p>
+                        )}
                       </div>
 
                       <button
                         type="submit"
-                        disabled={isSubmitting || !selectedDate || !selectedTime}
-                        className="w-full py-4 bg-linear-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                        disabled={isSubmitting}
+                        className="w-full py-4 bg-linear-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
                       >
                         {isSubmitting ? (
                           <>
@@ -375,7 +510,7 @@ export default function ScheduleCallPage() {
                         )}
                       </button>
                     </form>
-                  </>
+                  </div>
                 )}
               </div>
             </div>

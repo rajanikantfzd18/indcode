@@ -228,7 +228,7 @@ export default function CareersPage() {
 
                     {/* Apply Button */}
                     <div>
-                      <a href={`/apply_now?job=${encodeURIComponent(job.title)}&department=${encodeURIComponent(job.department)}`} className="inline-block">
+                      <a href={`/job_application?job=${encodeURIComponent(job.title)}&department=${encodeURIComponent(job.department)}`} className="inline-block">
                         <button className="px-8 py-3 bg-linear-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 flex items-center gap-2 group cursor-pointer">
                           Apply Now
                           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />

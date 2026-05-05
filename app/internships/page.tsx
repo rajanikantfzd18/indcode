@@ -197,7 +197,7 @@ export default function InternshipsPage() {
                 
                 {/* Apply Button */}
                 <Link 
-                  href={`/apply_now?job=${encodeURIComponent(program.title)}&department=${encodeURIComponent(program.department)}&type=internship`}
+                  href={`/intern_application?job=${encodeURIComponent(program.title)}&department=${encodeURIComponent(program.department)}&type=internship`}
                   className="block w-full py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-center transition-colors cursor-pointer"
                 >
                   Apply Now

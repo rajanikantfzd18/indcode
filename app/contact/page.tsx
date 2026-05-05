@@ -14,8 +14,10 @@ import {
   Globe,
   Shield,
   User,
-  ArrowRight
+  ArrowRight,
+  AlertCircle
 } from "lucide-react";
+import { supabase } from "@/lib/supabase";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -28,8 +30,10 @@ export default function ContactPage() {
     projectType: ""
   });
 
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const projectTypes = [
     "Web Development",
@@ -77,35 +81,132 @@ export default function ContactPage() {
     }
   ];
 
+  // Validation function
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    // Name validation
+    if (!formData.name.trim()) {
+      newErrors.name = "Name is required";
+    } else if (formData.name.length < 2) {
+      newErrors.name = "Name must be at least 2 characters";
+    } else if (formData.name.length > 100) {
+      newErrors.name = "Name must be less than 100 characters";
+    }
+
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email) {
+      newErrors.email = "Email is required";
+    } else if (!emailRegex.test(formData.email)) {
+      newErrors.email = "Please enter a valid email address";
+    }
+
+    // Phone validation
+    const phoneRegex = /^[0-9+\-\s()]{10,15}$/;
+    if (!formData.phone) {
+      newErrors.phone = "Phone number is required";
+    } else if (!phoneRegex.test(formData.phone)) {
+      newErrors.phone = "Please enter a valid phone number";
+    }
+
+    // Project Type validation
+    if (!formData.projectType) {
+      newErrors.projectType = "Please select a project type";
+    }
+
+    // Message validation
+    if (!formData.message.trim()) {
+      newErrors.message = "Message is required";
+    } else if (formData.message.length < 10) {
+      newErrors.message = "Message must be at least 10 characters";
+    } else if (formData.message.length > 2000) {
+      newErrors.message = "Message must be less than 2000 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitError("");
+
+    // Validate form
+    if (!validateForm()) {
+      return;
+    }
+
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      // Insert data into Supabase
+      const { data, error } = await supabase
+        .from('contact_applications')
+        .insert([
+          {
+            name: formData.name.trim(),
+            email: formData.email.trim().toLowerCase(),
+            phone: formData.phone.trim(),
+            company: formData.company.trim() || null,
+            project_type: formData.projectType,
+            budget: formData.budget || null,
+            message: formData.message.trim(),
+            status: 'pending'
+          }
+        ])
+        .select();
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      if (error) {
+        throw error;
+      }
 
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        company: "",
-        budget: "",
-        message: "",
-        projectType: ""
-      });
-    }, 3000);
+      // Success
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+
+      // Reset form after 15 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          company: "",
+          budget: "",
+          message: "",
+          projectType: ""
+        });
+        setErrors({});
+      }, 15000);
+
+    } catch (error: any) {
+      console.error("Error submitting form:", error);
+      setSubmitError(error.message || "Failed to submit. Please try again.");
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: value
+    });
+
+    // Clear error for this field when user starts typing
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: ""
+      });
+    }
+  };
+
+  const handleBudgetChange = (range: string) => {
+    setFormData({
+      ...formData,
+      budget: range
     });
   };
 
@@ -145,9 +246,12 @@ export default function ContactPage() {
       <section className="py-12 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-16">
-            {/* Contact Info Cards */}
-            <div>
-              <h2 className="text-3xl font-bold text-white mb-12">Get in Touch</h2>
+            {/* Contact Info Side */}
+            <div className="bg-gray-900 rounded-2xl p-8 border border-gray-800 hover:border-blue-500/50 transition-all duration-300 h-full">
+              <div className="flex items-center gap-3 mb-8">
+                <Mail className="w-7 h-7 text-blue-400" />
+                <h2 className="text-2xl font-bold text-white">Get in Touch</h2>
+              </div>
 
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
@@ -157,10 +261,10 @@ export default function ContactPage() {
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="group bg-gray-900 rounded-2xl p-6 border border-gray-800 hover:border-blue-500/50 transition-all duration-300"
+                    className="group"
                   >
                     <div className="flex items-start gap-4">
-                      <div className={`p-3 rounded-xl bg-linear-to-br ₹ {info.color}`}>
+                      <div className={`p-3 rounded-xl bg-linear-to-br ${info.color}`}>
                         <info.icon className="w-6 h-6 text-white" />
                       </div>
                       <div>
@@ -181,7 +285,7 @@ export default function ContactPage() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="mt-12 p-6 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/20 hover:border-blue-500/50 transition-all duration-300"
+                className="mt-8 p-6 bg-linear-to-r from-blue-500/10 to-purple-500/10 rounded-2xl border border-blue-500/20 hover:border-blue-500/50 transition-all duration-300"
               >
                 <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2">
                   <Shield className="w-5 h-5 text-blue-400" />
@@ -205,35 +309,38 @@ export default function ContactPage() {
               </motion.div>
             </div>
 
-            {/* Contact Form */}
+            {/* Contact Form - Success Message Centered */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-gray-900 rounded-2xl p-8 border border-gray-800 hover:border-blue-500/50 transition-all duration-300"
+              className="bg-gray-900 rounded-2xl p-8 border border-gray-800 hover:border-blue-500/50 transition-all duration-300 h-full flex items-center"
             >
               {isSubmitted ? (
-                <div className="text-center py-12">
+                <div className="w-full flex flex-col items-center justify-center py-12">
                   <div className="inline-flex p-4 rounded-full bg-green-500/20 mb-6">
-                    <CheckCircle className="w-12 h-12 text-green-500" />
+                    <CheckCircle className="w-16 h-16 text-green-500" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white mb-4">Message Sent Successfully!</h3>
-                  <p className="text-gray-400 mb-8">
+                  <h3 className="text-2xl md:text-3xl font-bold text-white mb-4 text-center">
+                    Message Sent Successfully!
+                  </h3>
+                  <p className="text-gray-400 text-center max-w-md mx-auto">
                     Thank you for reaching out. We'll get back to you within 24 hours.
                   </p>
-                  <button
-                    onClick={() => setIsSubmitted(false)}
-                    className="text-blue-400 hover:text-blue-300 transition-colors"
-                  >
-                    Send another message
-                  </button>
                 </div>
               ) : (
-                <>
+                <div className="w-full">
                   <div className="flex items-center gap-3 mb-8">
                     <MessageSquare className="w-6 h-6 text-blue-400" />
                     <h2 className="text-2xl font-bold text-white">Send us a Message</h2>
                   </div>
+
+                  {submitError && (
+                    <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-xl flex items-center gap-3">
+                      <AlertCircle className="w-5 h-5 text-red-400" />
+                      <p className="text-red-400 text-sm">{submitError}</p>
+                    </div>
+                  )}
 
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
@@ -247,10 +354,12 @@ export default function ContactPage() {
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
-                          required
-                          className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                          className={`w-full bg-gray-800 border ${errors.name ? 'border-red-500' : 'border-gray-700'} rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors`}
                           placeholder="Your full name"
                         />
+                        {errors.name && (
+                          <p className="text-red-400 text-xs mt-1">{errors.name}</p>
+                        )}
                       </div>
 
                       <div>
@@ -263,10 +372,12 @@ export default function ContactPage() {
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
-                          required
-                          className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                          className={`w-full bg-gray-800 border ${errors.email ? 'border-red-500' : 'border-gray-700'} rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors`}
                           placeholder="Your email address"
                         />
+                        {errors.email && (
+                          <p className="text-red-400 text-xs mt-1">{errors.email}</p>
+                        )}
                       </div>
                     </div>
 
@@ -281,9 +392,12 @@ export default function ContactPage() {
                           name="phone"
                           value={formData.phone}
                           onChange={handleChange}
-                          className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                          className={`w-full bg-gray-800 border ${errors.phone ? 'border-red-500' : 'border-gray-700'} rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors`}
                           placeholder="Your phone number"
                         />
+                        {errors.phone && (
+                          <p className="text-red-400 text-xs mt-1">{errors.phone}</p>
+                        )}
                       </div>
 
                       <div>
@@ -310,14 +424,16 @@ export default function ContactPage() {
                         name="projectType"
                         value={formData.projectType}
                         onChange={handleChange}
-                        required
-                        className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                        className={`w-full bg-gray-800 border ${errors.projectType ? 'border-red-500' : 'border-gray-700'} rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors`}
                       >
                         <option value="">Select a project type</option>
                         {projectTypes.map((type) => (
                           <option key={type} value={type}>{type}</option>
                         ))}
                       </select>
+                      {errors.projectType && (
+                        <p className="text-red-400 text-xs mt-1">{errors.projectType}</p>
+                      )}
                     </div>
 
                     <div>
@@ -332,7 +448,7 @@ export default function ContactPage() {
                               name="budget"
                               value={range}
                               checked={formData.budget === range}
-                              onChange={handleChange}
+                              onChange={() => handleBudgetChange(range)}
                               className="text-blue-500 focus:ring-blue-500"
                             />
                             <span className="text-gray-300 text-sm">{range}</span>
@@ -349,11 +465,13 @@ export default function ContactPage() {
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
-                        required
                         rows={5}
-                        className="w-full bg-gray-800 border border-gray-700 rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
+                        className={`w-full bg-gray-800 border ${errors.message ? 'border-red-500' : 'border-gray-700'} rounded-xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors`}
                         placeholder="Tell us about your project, goals, and timeline..."
                       />
+                      {errors.message && (
+                        <p className="text-red-400 text-xs mt-1">{errors.message}</p>
+                      )}
                     </div>
 
                     <div className="flex items-center justify-between pt-4">
@@ -379,7 +497,7 @@ export default function ContactPage() {
                       </button>
                     </div>
                   </form>
-                </>
+                </div>
               )}
             </motion.div>
           </div>
@@ -466,15 +584,13 @@ export default function ContactPage() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center">
-              {/* Schedule a Free Call button - Less width */}
               <a href="/schedule_call" className="w-full max-w-xs sm:w-auto">
                 <button className="w-full px-6 py-4 bg-linear-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl hover:from-blue-500 hover:to-blue-600 transition-all duration-300 hover:scale-105 shadow-xl shadow-blue-900/20 flex items-center justify-center gap-2 cursor-pointer">
                   Schedule a Free Call
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-5 h-5" />
                 </button>
               </a>
 
-              {/* Download Our Brochure button - Full width */}
               <a
                 href="/documents/brochure.pdf"
                 download="Indcode-Technologies-Brochure.pdf"
